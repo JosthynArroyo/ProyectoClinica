@@ -1,3 +1,5 @@
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 <x-guest-layout>
     <div class="max-w-md mx-auto bg-white p-8 rounded shadow-md mt-8">
         <h2 class="text-2xl font-bold text-center text-indigo-700 mb-6">Acceso al Sistema - Clínica Los Ángeles</h2>
@@ -8,7 +10,7 @@
             @csrf
 
             <!-- Correo electrónico -->
-            <div>
+            <div >
                 <x-input-label for="email" :value="'Correo Electrónico'" />
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />

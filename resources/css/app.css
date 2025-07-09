@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Estilos personalizados para la página welcome */
+
+.bg-hero {
+    background-image: url('https://images.unsplash.com/photo-1588776814546-ec6ec3b8cc4e');
+    background-size: cover;
+    background-position: center;
+    height: calc(100vh - 88px); /* Ajuste para altura del header */
+}
+
+.hero-overlay {
+    background-color: rgba(255, 255, 255, 0.92);
+}
+
+.btn-primary {
+    @apply bg-indigo-600 text-white px-6 py-3 rounded hover:bg-indigo-700 transition-all duration-300 ease-in-out;
+}
+
+.text-heading {
+    @apply text-3xl font-bold text-indigo-800 mb-4;
+}
+
+.text-subtitle {
+    @apply text-gray-700 mb-6;
+}
