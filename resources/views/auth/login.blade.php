@@ -1,53 +1,88 @@
 <x-guest-layout>
-    <div class="max-w-md mx-auto bg-white p-8 rounded shadow-md mt-8">
-        <h2 class="text-2xl font-bold text-center text-indigo-700 mb-6">Acceso al Sistema - Clínica Los Ángeles</h2>
 
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+    <h2 class="text-2xl font-bold text-center text-indigo-700 mb-6">Ingreso al Sistema - Clínica Los Ángeles</h2>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+    <!-- Estado de la sesión -->
+    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-            <!-- Correo electrónico -->
-            <div>
-                <x-input-label for="email" :value="'Correo Electrónico'" />
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
-            </div>
+    <form method="POST" action="{{ route('login') }}" class="bg-white p-6 rounded shadow-md w-full max-w-md mx-auto">
+        @csrf
 
-            <!-- Contraseña -->
-            <div class="mt-4">
-                <x-input-label for="password" :value="'Contraseña'" />
-                <x-text-input id="password" class="block mt-1 w-full"
-                              type="password"
-                              name="password"
-                              required autocomplete="current-password" />
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
-            </div>
+        <!-- Correo electrónico -->
+        <div>
+            <x-input-label for="email" :value="'Correo Electrónico'" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
 
-            <!-- Recordarme -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                    <span class="ms-2 text-sm text-gray-600">Recordarme</span>
-                </label>
-            </div>
+        <!-- Contraseña -->
+        <div class="mt-4">
+            <x-input-label for="password" :value="'Contraseña'" />
+            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        </div>
 
-            <div class="flex items-center justify-between mt-6">
-                @if (Route::has('password.request'))
-                    <a class="text-sm text-indigo-600 hover:text-indigo-900" href="{{ route('password.request') }}">
-                        ¿Olvidaste tu contraseña?
-                    </a>
-                @endif
+        <!-- Recordarme -->
+        <div class="block mt-4">
+            <label for="remember_me" class="inline-flex items-center">
+                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                <span class="ms-2 text-sm text-gray-600">Recordarme</span>
+            </label>
+        </div>
 
-                <x-primary-button class="ms-3">
-                    Ingresar
-                </x-primary-button>
-            </div>
-        </form>
+        <div class="flex items-center justify-between mt-6">
+            @if (Route::has('password.request'))
+                <a class="text-sm text-indigo-600 hover:text-indigo-900" href="{{ route('password.request') }}">
+                    ¿Olvidaste tu contraseña?
+                </a>
+            @endif
 
-        <p class="mt-6 text-center text-sm text-gray-600">
-            ¿No tienes cuenta?
-            <a href="{{ route('register') }}" class="text-indigo-600 hover:text-indigo-800 font-semibold">Regístrate aquí</a>
-        </p>
+            <x-primary-button class="ms-3">
+                Ingresar
+            </x-primary-button>
+        </div>
+    </form>
+
+    <p class="mt-6 text-center text-sm text-gray-600">
+        ¿No tienes una cuenta? 
+        <a href="{{ route('register') }}" class="text-indigo-600 hover:text-indigo-800 font-semibold">Regístrate aquí</a>
+    </p>
+    <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-cyan-200 via-white to-blue-300 py-12 px-6 sm:px-6 lg:px-8">
+        <div class="w-full max-w-md bg-white p-8 rounded-3xl shadow-xl border-t-4 border-cyan-500 transform transition duration-300 hover:scale-[1.01]">
+            
+            
+ 
+        
+            <x-auth-session-status class="mb-4" :status="session('status')" />
+
+           
+            <form method="POST" action="{{ route('login') }}" class="space-y-6 mt-6">
+                @csrf
+
+                
+                <div>
+                    <x-input-label for="email" :value="'Correo electrónico'" class="text-cyan-700 font-semibold" />
+                    <x-text-input id="email" class="block mt-1 w-full border-gray-300 focus:border-cyan-600 focus:ring-cyan-500 rounded-lg shadow-sm" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                </div> 
+
+
+            
+              
+                    @if (Route::has('password.request'))
+                        <a class="text-sm text-cyan-600 hover:text-cyan-800 font-medium" href="{{ route('password.request') }}">
+                            ¿Olvidaste tu contrasena?
+                        </a>
+                    @endif
+                </div>
+
+                
+                <div>
+                    <button type="submit" class="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white py-2 rounded-lg font-semibold shadow-md transition duration-200 ease-in-out transform hover:scale-[1.02]">
+                        Iniciar Sesión
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </x-guest-layout>
