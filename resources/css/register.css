@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset general */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* === FORMULARIO DE REGISTRO DE PACIENTE === */
+
+.register-wrapper {
+    max-width: 500px;
+    margin: 4rem auto;
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+    border-top: 4px solid #4a5568;
+}
+
+.register-title {
+    font-family: 'Roboto Slab', serif;
+    font-size: 2rem;
+    font-weight: 800;
+    text-align: center;
+    color: #2d3748;
+    margin-bottom: 0.2rem;
+}
+
+.register-subtitle {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #718096;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    background-color: #f7fafc;
+    border: 1px solid #cbd5e0;
+    border-radius: 0.6rem;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+    outline: none;
+}
+
+.input-error {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #e53e3e;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.form-link {
+    font-size: 0.9rem;
+    color: #667eea;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.form-link:hover {
+    color: #434190;
+    text-decoration: underline;
+}
+
+.btn-submit {
+    background-color: #667eea;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    transition: background 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #5a67d8;
+}

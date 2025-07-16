@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
 
-class ContactoController extends Controller
+class Controller extends BaseController
 {
-    public function enviar(Request $request)
-    {
-        // Aquí puedes procesar la info del formulario
-        // Por ahora solo redirigimos o retornamos algo
-        return redirect()->back()->with('status', 'Mensaje enviado correctamente.');
-    }
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }

@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class CustomLoginController extends Controller
 {
-    // Usuarios quemados en el código (en lugar de BD)
     private $users = [
         ['email' => 'josthyn123@gmail.com', 'password' => 'Josthyn123', 'name' => 'Usuario Uno'],
         ['email' => 'Dylan123@gmail.com', 'password' => 'Dylan456', 'name' => 'Usuario Dos'],
@@ -22,8 +21,7 @@ class CustomLoginController extends Controller
 
         foreach ($this->users as $user) {
             if ($user['email'] === $request->email && $user['password'] === $request->password) {
-                // Guardamos el usuario en sesión
-                session(['user' => $user]);
+                  session(['user' => $user]);
                 return redirect('/dashboard');
             }
         }
