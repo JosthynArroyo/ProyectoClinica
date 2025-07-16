@@ -1,41 +1,32 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\Auth\CustomLoginController;
+use App\Http\Controllers\Auth\CustomRegisterController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/contacto', function () {
-    return view('contact');
-})->name('contact');
+// Registro
+Route::get('/register', [CustomRegisterController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [CustomRegisterController::class, 'register'])->name('custom.register');
 
-Route::post('/contacto', [ContactoController::class, 'enviar'])->name('contact.send');
+// Login
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::post('/login', [CustomLoginController::class, 'login'])->name('custom.login');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+Route::middleware('check.custom.auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::get('/logout', function () {
+        session()->forget('user');
+        return redirect()->route('login');
+    })->name('logout');
 });
-
-require __DIR__.'/auth.php';
-
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-
-Route::middleware('guest')->group(function () {
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
-});
-
-Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-    ->middleware('auth')
-    ->name('logout');
-
-
-
