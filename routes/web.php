@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,12 +29,22 @@ Route::middleware(['auth', 'role:administrador'])->prefix('admin')->group(functi
 //grupo rutas paciente
 Route::middleware(['auth', 'role:paciente'])->prefix('paciente')->group(function (){
     Route::get('/dashboard', [App\Http\Controllers\Paciente\AdminController::class, 'dashboard'])->name('paciente.dashboard');
-    //mas rutas del administrador
+    //mas rutas del paciente
 });
 
 
-//grupo rutas paciente
+//grupo rutas doctor
 Route::middleware(['auth', 'role:doctor'])->prefix('doctor')->group(function (){
     Route::get('/dashboard', [App\Http\Controllers\Doctor\AdminController::class, 'dashboard'])->name('doctor.dashboard');
-    //mas rutas del administrador
+    //mas rutas del doctor
 });
+
+
+
+//Cerrar Sesión Dashboard Admin
+Route::get('/salir', function () {
+    Auth::logout(); 
+    return redirect('/'); 
+})->name('salir');
+
+
