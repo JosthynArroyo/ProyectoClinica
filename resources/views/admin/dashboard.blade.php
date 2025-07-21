@@ -44,6 +44,13 @@
         </section>
     </main>
 </div>
+<footer id="footer">
+        <div class="footer-txt">
+            <p>
+                Clínica Los Ángeles © {{ date('Y') }} - Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
 
 </body>
 </html>

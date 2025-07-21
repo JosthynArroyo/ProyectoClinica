@@ -71,9 +71,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $role = Role::find(1);//administrador
+        $role = Role::where('name', 'administrador')->first();//cambiar de roles
         if($role){
-            $user->roles()->attach($role);
+            $user->roles()->attach($role->id);
         }
 
         return $user;
@@ -84,7 +84,7 @@ class RegisterController extends Controller
         if ($user->hasRole('administrador')) {
             return redirect('admin/dashboard');
         } elseif ($user->hasRole('paciente')) {
-            return redirect('cliente/dashboard');
+            return redirect('paciente/dashboard');
         } elseif ($user->hasRole('doctor')) {
             return redirect('doctor/dashboard');
         }
