@@ -27,62 +27,57 @@
 
                 <!-- ADMIN Dashboard -->
                 <a href="#">
-                    <span class="material-symbols-outlined">grid_view</span>
-                    <h3>Panel Principal</h3>
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <h3>Inicio</h3>
                 </a>
                 <a href="#">
-                    <span class="material-symbols-outlined">groups</span>
-                    <h3>Gestión de Usuarios</h3>
+                    <span class="material-symbols-outlined">person</span>
+                    <h3>Usuarios</h3>
                 </a>
                 <a href="#">
-                    <span class="material-symbols-outlined">event_available</span>
-                    <h3>Citas Programadas</h3>
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    <h3>Citas Médicas</h3>
                 </a>
                 <a href="#">
-                    <span class="material-symbols-outlined">local_hospital</span>
-                    <h3>Médicos</h3>
+                    <span class="material-symbols-outlined">medical_services</span>
+                    <h3>Doctores</h3>
                 </a>
                 <a href="#">
-                    <span class="material-symbols-outlined">patient_list</span>
+                    <span class="material-symbols-outlined">sick</span>
                     <h3>Pacientes</h3>
                 </a>
                 <a href="#">
-                    <span class="material-symbols-outlined">bar_chart</span>
-                    <h3>Reportes</h3>
+                    <span class="material-symbols-outlined">analytics</span>
+                    <h3>Estadísticas</h3>
                 </a>
                 <a href="#">
-                    <span class="material-symbols-outlined">settings</span>
-                    <h3>Configuración</h3>
+                    <span class="material-symbols-outlined">tune</span>
+                    <h3>Preferencias</h3>
                 </a>
                 <a href="{{ route('salir') }}">
                     <span class="material-symbols-outlined">logout</span>
-                    <h3>Salir</h3>
+                    <h3>Cerrar Sesión</h3>
                 </a>
-
-                
-
-                
             </div>
-            
-
         </aside>
         <!--aside section end-->
 
         <!--main section start-->
         <main>
-            <h1>Dashboard</h1>
+            <h1>Panel de Control</h1>
              <div class="date">
                 <input type="date">
              </div>
 
            <div class="insights">
+
                 <!--start selling-->
                    <div class="sales">
-                      <span class="material-symbols-sharp">trending_up</span>
+                      <span class="material-symbols-sharp">monitor_heart</span>
                         <div class="middle">
                           <div class="left">
-                             <h3>Total</h3>
-                             <h1>$50,0</h1>
+                             <h3>Citas Totales</h3>
+                             <h1>120</h1>
                           </div>
                           <div class="progress">
                               <svg>
@@ -91,18 +86,109 @@
                               <div class="number">80%</div>
                           </div>
                         </div>
-                        <small>Last 24 Hours</small>
+                        <small>Últimas 24 horas</small>
                    </div>
-                <!--start selling-->
+                <!--end selling-->
 
+                <!--start expenses-->
+                <div class="expenses">
+                      <span class="material-symbols-sharp">event_note</span>
+                        <div class="middle">
+                          <div class="left">
+                             <h3>Citas Pendientes</h3>
+                             <h1>35</h1>
+                          </div>
+                          <div class="progress">
+                              <svg>
+                                 <circle r="30" cy="40" cx="40"></circle>
+                              </svg>
+                              <div class="number">65%</div>
+                          </div>
+                        </div>
+                        <small>Últimas 24 horas</small>
+                   </div>
+                <!--end expenses-->
+
+
+                <!--start income-->
+                <div class="income">
+                      <span class="material-symbols-sharp">check_circle</span>
+                        <div class="middle">
+                          <div class="left">
+                             <h3>Citas Completadas</h3>
+                             <h1>85</h1>
+                          </div>
+                          <div class="progress">
+                              <svg>
+                                 <circle r="30" cy="40" cx="40"></circle>
+                              </svg>
+                              <div class="number">100%</div>
+                          </div>
+                        </div>
+                        <small>Últimas 24 horas</small>
+                   </div>
+                <!--end income-->
            </div>
+           <!--end insights-->
+
+           <!--start recent order-->
+           <div class="recent_order">
+            <h1>Citas Recientes</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Paciente</th>
+                        <th>Doctor</th>
+                        <th>Estado</th>
+                        <th>Horario</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Juan Pérez</td>
+                        <td>Dra. Ramírez</td>
+                        <td class="warning">Pendiente</td>
+                        <td class="primary">Ver Detalles</td>
+                    </tr>
+                </tbody>
+
+                <tbody>
+                    <tr>
+                        <td>Ana Gómez</td>
+                        <td>Dr. Castillo</td>
+                        <td class="warning">Pendiente</td>
+                        <td class="primary">Ver Detalles</td>
+                    </tr>
+                </tbody>
+
+                <tbody>
+                    <tr>
+                        <td>Roberto Ruiz</td>
+                        <td>Dr. Morales</td>
+                        <td class="warning">Pendiente</td>
+                        <td class="primary">Ver Detalles</td>
+                    </tr>
+                </tbody>
+
+                <tbody>
+                    <tr>
+                        <td>Lucía Torres</td>
+                        <td>Dra. Medina</td>
+                        <td class="warning">Pendiente</td>
+                        <td class="primary">Ver Detalles</td>
+                    </tr>
+                </tbody>
+            </table>
+           </div>
+           <!--end recent order-->
                       
         </main>
         <!--main section end-->
 
         <!--right section start-->
             <div class="right">
-                  <h1>right</h1>
+                  <h1>Panel Derecho</h1>
             </div>
         <!--end right section-->
     </div>
