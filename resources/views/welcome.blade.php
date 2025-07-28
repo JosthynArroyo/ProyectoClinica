@@ -81,7 +81,7 @@
 
         <div class="services-group">
             <div class="services-1">
-                <img src="{{ asset('img/i1.svg') }}" alt="Consulta general">
+                <img src="{{ asset('img/i3.svg') }}" alt="Consulta general">
                 <h3>Consulta General</h3>
                 <p>
                     Evaluaciones médicas primarias para todas las edades. Recomendaciones y diagnósticos generales.
@@ -90,7 +90,7 @@
             </div>
 
             <div class="services-1">
-                <img src="{{ asset('img/i2.svg') }}" alt="Pediatría">
+                <img src="{{ asset('img/i3.svg') }}" alt="Pediatría">
                 <h3>Pediatría</h3>
                 <p>
                     Atención especializada para bebés, niños y adolescentes por parte de profesionales calificados.
