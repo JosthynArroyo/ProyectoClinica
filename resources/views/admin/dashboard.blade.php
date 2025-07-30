@@ -188,7 +188,109 @@
 
         <!--right section start-->
             <div class="right">
-                  <h1>Panel Derecho</h1>
+                <div class="top">
+                    <button id="menu_bar">
+                        <span class="material-symbols-sharp">menu</span>
+                    </button>
+                    <div class="theme-toggler">
+                        <span class="material-symbols-sharp">light_mode</span>
+                        <span class="material-symbols-sharp">dark_mode</span>
+                    </div>
+                    <div class="profile">
+                        <div class="info">
+                            <p><b>Babar</b></p>
+                            <p>Admin</p>
+                            <small class="text-muted"></small>
+                        </div>
+                        <div class="profile-photo">
+                            <img src="{{ asset('img/doctor1.jpg') }}" alt="Descripción de la imagen">
+                        </div>
+                    </div>
+                </div>
+                <!--end top-->
+                <!--start recent update-->
+              <div class="recents_updates">
+                <h2>Recent Update</h2>
+                
+            <div class="updates">
+
+                
+                <div class="update">
+                    <div class="profile-photo">
+                        <img src="{{ asset('img/doctor2.jpg') }}" alt="Descripción de la imagen">
+                    </div>
+                    <div class="message">
+                        <p><b>Babar</b>Recived his order</p>
+                    </div>
+                </div>
+                <div class="updates">
+                    <div class="profile-photo">
+                        <img src="{{ asset('img/doctor1.jpg') }}" alt="Descripción de la imagen">
+                    </div>
+                    <div class="message">
+                        <p><b>Babar</b>Recived his order</p>
+                    </div>
+                </div>
+                <div class="updates">
+                    <div class="profile-photo">
+                        <img src="{{ asset('img/doctora1.jpg') }}" alt="Descripción de la imagen">
+                    </div>
+                    <div class="message">
+                        <p><b>Babar</b>Recived his order</p>
+                    </div>
+                </div>
+            </div>
+
+
+              </div>
+
+
+                  <div class="sales_analytics">
+                    <h2>Sales analytics</h2>
+
+                    <div class="item onlion">
+                        <div class="icon">
+                            <span class="material-symbols-sharp">shopping_cart</span>
+                        </div>
+                        <div class="right_text">
+                            <div class="info">
+                                <h3>onlion orders</h3>
+                                <small class="text-muted">Last seen 2 Hours</small>
+                            </div>
+                            <h5 class="danger">17%</h5>
+                            <h3>387</h3>
+                        </div>
+                    </div>
+
+                    <div class="item onlion">
+                        <div class="icon">
+                            <span class="material-symbols-sharp">shopping_cart</span>
+                        </div>
+                        <div class="right_text">
+                            <div class="info">
+                                <h3>onlion orders</h3>
+                                <small class="text-muted">Last seen 2 Hours</small>
+                            </div>
+                            <h5 class="danger">17%</h5>
+                            <h3>387</h3>
+                        </div>
+                    </div>
+
+                    <div class="item onlion">
+                        <div class="icon">
+                            <span class="material-symbols-sharp">shopping_cart</span>
+                        </div>
+                        <div class="right_text">
+                            <div class="info">
+                                <h3>onlion orders</h3>
+                                <small class="text-muted">Last seen 2 Hours</small>
+                            </div>
+                            <h5 class="danger">17%</h5>
+                            <h3>387</h3>
+                        </div>
+                    </div>
+
+                  </div>
             </div>
         <!--end right section-->
     </div>
