@@ -245,7 +245,7 @@
                             <small class="text-muted">Últimas 2 horas</small>
                         </div>
                         <h5 class="danger">+10%</h5>
-                        <h3>45</h3>
+                        <h3>40</h3>
                     </div>
                 </div>
 

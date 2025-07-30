@@ -27,14 +27,14 @@ body {
     animation: fadeInPage 2s ease-out both;
 }
 
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
 }
 
+/* ===== HEADER ===== */
 .header {
-    position: relative; 
+    position: relative;
     background-image: url('../img/clinicalosangeles.jpg');
     background-size: cover;
     background-position: center;
@@ -49,15 +49,10 @@ body {
 .header::before {
     content: "";
     position: absolute;
-    inset: 0; 
-    background-image: inherit; 
-    background-size: cover;
-    background-position: center;
-    opacity: 0.4; 
-    z-index: -1; 
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6); 
+    z-index: -1;
 }
-
-
 
 .menu {
     position: absolute;
@@ -68,13 +63,15 @@ body {
     align-items: center;
     justify-content: space-between;
     z-index: 1000;
+    padding: 20px 40px;
 }
 
 .logo {
     font-size: 24px;
-    color: #0d6efd;
+    color: #ffffff;
     font-weight: 800;
     text-transform: uppercase;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
 }
 
 .menu .navbar ul li {
@@ -85,12 +82,13 @@ body {
 .menu .navbar ul li a {
     font-size: 18px;
     padding: 20px;
-    color: #2563eb;
+    color: #ffffff;
     display: block;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .menu .navbar ul li a:hover {
-    color: #1e40af;
+    color: #cbd5e1;
 }
 
 #menu {
@@ -106,31 +104,38 @@ body {
     display: none;
 }
 
+/* ===== HEADER TEXT ===== */
 .header-txt {
     text-align: center;
     margin-bottom: 45px;
+    z-index: 10;
 }
 
-.header-txt h1,
-span,
-h3 {
+.header-txt h1 {
     font-size: 90px;
     letter-spacing: 5px;
     text-transform: uppercase;
     font-family: "Intel One Mono", monospace;
-    color: #0d6efd;
+    color: #3b82f6;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
     margin-bottom: 15px;
     margin-top: 45px;
 }
 
 .header-txt span {
     font-size: 25px;
+    color: #60a5fa;
+    display: block;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
 }
 
 .header-txt p {
-    color: #000000;
-    padding: 0 250px;
-    margin: 25px 0;
+    color: #e2e8f0;
+    max-width: 700px;
+    margin: 25px auto;
+    padding: 0 20px;
+    font-size: 18px;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
 }
 
 .btn-1 {
@@ -145,6 +150,8 @@ h3 {
     margin: 25px 0;
     border: 0;
     border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s;
 }
 
 .btn-1:hover {
@@ -158,17 +165,40 @@ h3 {
     margin-top: 20px;
 }
 
+.header-dir {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap; 
+    margin-top: 40px;
+    gap: 20px;
+}
+
+.dir {
+    flex: 1 1 250px; 
+    padding: 10px 20px;
+    max-width: 300px;
+}
+
 .dir h3 {
     font-size: 18px;
-    color: #fcfcfc;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 .dir p {
-    font-size: 22px;
-    color: #2a5d50;
-    text-transform: uppercase;
+    font-size: 18px;
+    color: #cbd5e1;
+    word-wrap: break-word;
+    line-height: 1.4;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
 }
 
+
+/* ===== WELCOME ===== */
 .welcome {
     display: flex;
 }
@@ -206,6 +236,7 @@ p {
     color: #0a58ca;
 }
 
+/* ===== SERVICES ===== */
 .services {
     padding: 100px 0;
     text-align: center;
@@ -240,15 +271,14 @@ hr {
     margin: 0 10px;
     border-radius: 15px;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .services-1:hover {
     background-color: #d6e4f1;
-    transform: translateY(-10px); 
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
-
 
 .services-1 img {
     width: 25px;
@@ -265,6 +295,7 @@ hr {
     font-size: 16px;
 }
 
+/* ===== PRICES ===== */
 .prices {
     display: flex;
     background-color: #e8f1f8;
@@ -306,6 +337,7 @@ td {
     width: 50%;
 }
 
+/* ===== PERSONAL ===== */
 .personal {
     padding: 100px 0;
     text-align: center;
@@ -323,13 +355,13 @@ td {
 .personal-group {
     display: flex;
     justify-content: center;
-    gap: 20px; /* espacio entre cada tarjeta */
-    flex-wrap: wrap; /* para que se acomoden en móviles */
+    gap: 20px;
+    flex-wrap: wrap;
     padding: 20px;
 }
 
 .personal-1 {
-    width: 320px; /* tarjeta más ancha */
+    width: 320px;
     text-align: center;
     padding: 25px;
     border-radius: 12px;
@@ -340,23 +372,17 @@ td {
 }
 
 .personal-1:hover {
-    background-color: #d6e4f1; /* color suave al pasar mouse */
-    transform: translateY(-5px); /* se levanta un poco */
+    background-color: #d6e4f1;
+    transform: translateY(-5px);
 }
 
 .personal-1 img {
     width: 120px;
     height: 120px;
     object-fit: cover;
-    border-radius: 0; /* cuadrado, como pediste */
+    border-radius: 0;
     display: block;
     margin: 0 auto 15px;
-}
-
-.personal-1 h3 {
-    font-size: 22px;
-    color: #0d1b2a;
-    margin-bottom: 10px;
 }
 
 .personal-1 p {
@@ -377,7 +403,7 @@ td {
     color: #0a58ca;
 }
 
-
+/* ===== FOOTER ===== */
 .footer-txt {
     text-align: center;
     padding: 20px;

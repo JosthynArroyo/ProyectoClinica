@@ -97,7 +97,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Citas Realizadas</h3>
-                            <h1>8</h1>
+                            <h1>5</h1>
                         </div>
                         <div class="progress">
                             <svg><circle r="30" cy="40" cx="40"></circle></svg>

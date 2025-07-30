@@ -104,7 +104,7 @@
                             <div class="number">100%</div>
                         </div>
                     </div>
-                    <small>Últimas 2 semanas</small>
+                    <small>Últimas 3 semanas</small>
                 </div>
             </div>
 
