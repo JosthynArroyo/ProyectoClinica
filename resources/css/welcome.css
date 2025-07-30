@@ -128,10 +128,20 @@ h3 {
 }
 
 .header-txt p {
-    color: #000000;
-    padding: 0 250px;
-    margin: 25px 0;
+    color: #000000;                /* Azul oscuro para mejor contraste */
+    
+ 
+    font-size: 1.25rem;            /* Tamaño de fuente más legible */
+    line-height: 1.8;              /* Altura de línea para mejorar lectura */
+    text-align: justify;          /* Alineación justificada del texto */
+    font-family: 'Segoe UI', sans-serif;  /* Fuente moderna y clara */
+    font-weight: 800;             /* Peso de fuente normal */
+   
+    
+   
+   
 }
+
 
 .btn-1 {
     display: inline-block;
@@ -165,7 +175,7 @@ h3 {
 
 .dir p {
     font-size: 22px;
-    color: #2a5d50;
+    color: #24b38a;
     text-transform: uppercase;
 }
 
@@ -381,7 +391,7 @@ td {
 .footer-txt {
     text-align: center;
     padding: 20px;
-    background-color: #0d1b2a;
+    background-color: #0a53a1;
     color: #cbd5e1;
     font-size: 14px;
 }
