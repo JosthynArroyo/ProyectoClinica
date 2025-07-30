@@ -24,7 +24,6 @@
             <!--end top-->
 
             <div class="sidebar">
-
                 <!-- ADMIN Dashboard -->
                 <a href="#">
                     <span class="material-symbols-outlined">dashboard</span>
@@ -65,234 +64,221 @@
         <!--main section start-->
         <main>
             <h1>Panel de Control</h1>
-             <div class="date">
+            <div class="date">
                 <input type="date">
-             </div>
+            </div>
 
-           <div class="insights">
-
+            <div class="insights">
                 <!--start selling-->
-                   <div class="sales">
-                      <span class="material-symbols-sharp">monitor_heart</span>
-                        <div class="middle">
-                          <div class="left">
-                             <h3>Citas Totales</h3>
-                             <h1>120</h1>
-                          </div>
-                          <div class="progress">
-                              <svg>
-                                 <circle r="30" cy="40" cx="40"></circle>
-                              </svg>
-                              <div class="number">80%</div>
-                          </div>
+                <div class="sales">
+                    <span class="material-symbols-sharp">monitor_heart</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Citas Totales</h3>
+                            <h1>120</h1>
                         </div>
-                        <small>Últimas 24 horas</small>
-                   </div>
+                        <div class="progress">
+                            <svg>
+                                <circle r="30" cy="40" cx="40"></circle>
+                            </svg>
+                            <div class="number">80%</div>
+                        </div>
+                    </div>
+                    <small>Últimas 24 horas</small>
+                </div>
                 <!--end selling-->
 
                 <!--start expenses-->
                 <div class="expenses">
-                      <span class="material-symbols-sharp">event_note</span>
-                        <div class="middle">
-                          <div class="left">
-                             <h3>Citas Pendientes</h3>
-                             <h1>35</h1>
-                          </div>
-                          <div class="progress">
-                              <svg>
-                                 <circle r="30" cy="40" cx="40"></circle>
-                              </svg>
-                              <div class="number">65%</div>
-                          </div>
+                    <span class="material-symbols-sharp">event_note</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Citas Pendientes</h3>
+                            <h1>35</h1>
                         </div>
-                        <small>Últimas 24 horas</small>
-                   </div>
+                        <div class="progress">
+                            <svg>
+                                <circle r="30" cy="40" cx="40"></circle>
+                            </svg>
+                            <div class="number">65%</div>
+                        </div>
+                    </div>
+                    <small>Últimas 24 horas</small>
+                </div>
                 <!--end expenses-->
-
 
                 <!--start income-->
                 <div class="income">
-                      <span class="material-symbols-sharp">check_circle</span>
-                        <div class="middle">
-                          <div class="left">
-                             <h3>Citas Completadas</h3>
-                             <h1>85</h1>
-                          </div>
-                          <div class="progress">
-                              <svg>
-                                 <circle r="30" cy="40" cx="40"></circle>
-                              </svg>
-                              <div class="number">100%</div>
-                          </div>
+                    <span class="material-symbols-sharp">check_circle</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Citas Completadas</h3>
+                            <h1>85</h1>
                         </div>
-                        <small>Últimas 24 horas</small>
-                   </div>
+                        <div class="progress">
+                            <svg>
+                                <circle r="30" cy="40" cx="40"></circle>
+                            </svg>
+                            <div class="number">100%</div>
+                        </div>
+                    </div>
+                    <small>Últimas 24 horas</small>
+                </div>
                 <!--end income-->
-           </div>
-           <!--end insights-->
+            </div>
+            <!--end insights-->
 
-           <!--start recent order-->
-           <div class="recent_order">
-            <h1>Citas Recientes</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Paciente</th>
-                        <th>Doctor</th>
-                        <th>Estado</th>
-                        <th>Horario</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>Juan Pérez</td>
-                        <td>Dra. Ramírez</td>
-                        <td class="warning">Pendiente</td>
-                        <td class="primary">Ver Detalles</td>
-                    </tr>
-                </tbody>
-
-                <tbody>
-                    <tr>
-                        <td>Ana Gómez</td>
-                        <td>Dr. Castillo</td>
-                        <td class="warning">Pendiente</td>
-                        <td class="primary">Ver Detalles</td>
-                    </tr>
-                </tbody>
-
-                <tbody>
-                    <tr>
-                        <td>Roberto Ruiz</td>
-                        <td>Dr. Morales</td>
-                        <td class="warning">Pendiente</td>
-                        <td class="primary">Ver Detalles</td>
-                    </tr>
-                </tbody>
-
-                <tbody>
-                    <tr>
-                        <td>Lucía Torres</td>
-                        <td>Dra. Medina</td>
-                        <td class="warning">Pendiente</td>
-                        <td class="primary">Ver Detalles</td>
-                    </tr>
-                </tbody>
-            </table>
-           </div>
-           <!--end recent order-->
-                      
+            <!--start recent order-->
+            <div class="recent_order">
+                <h1>Citas Recientes</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Paciente</th>
+                            <th>Doctor</th>
+                            <th>Estado</th>
+                            <th>Horario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Juan Pérez</td>
+                            <td>Dra. Ramírez</td>
+                            <td class="warning">Pendiente</td>
+                            <td class="primary">Ver Detalles</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>Ana Gómez</td>
+                            <td>Dr. Castillo</td>
+                            <td class="warning">Pendiente</td>
+                            <td class="primary">Ver Detalles</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>Roberto Ruiz</td>
+                            <td>Dr. Morales</td>
+                            <td class="warning">Pendiente</td>
+                            <td class="primary">Ver Detalles</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>Lucía Torres</td>
+                            <td>Dra. Medina</td>
+                            <td class="warning">Pendiente</td>
+                            <td class="primary">Ver Detalles</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--end recent order-->
         </main>
         <!--main section end-->
 
         <!--right section start-->
-            <div class="right">
-                <div class="top">
-                    <button id="menu_bar">
-                        <span class="material-symbols-sharp">menu</span>
-                    </button>
-                    <div class="theme-toggler">
-                        <span class="material-symbols-sharp">light_mode</span>
-                        <span class="material-symbols-sharp">dark_mode</span>
+        <div class="right">
+            <div class="top">
+                <button id="menu_bar">
+                    <span class="material-symbols-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-symbols-sharp">light_mode</span>
+                    <span class="material-symbols-sharp">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p><b>Admin</b></p>
+                        <p>Panel Clínico</p>
+                        <small class="text-muted"></small>
                     </div>
-                    <div class="profile">
-                        <div class="info">
-                            <p><b>Babar</b></p>
-                            <p>Admin</p>
-                            <small class="text-muted"></small>
-                        </div>
+                    <div class="profile-photo">
+                        <img src="{{ asset('img/doctor1.jpg') }}" alt="Foto del administrador">
+                    </div>
+                </div>
+            </div>
+            <!--end top-->
+
+            <!--start recent update-->
+            <div class="recents_updates">
+                <h2>Últimas actividades</h2>
+                <div class="updates">
+                    <div class="update">
                         <div class="profile-photo">
-                            <img src="{{ asset('img/doctor1.jpg') }}" alt="Descripción de la imagen">
+                            <img src="{{ asset('img/doctor2.jpg') }}" alt="Foto de doctor">
+                        </div>
+                        <div class="message">
+                            <p><b>Dr. Pérez</b> actualizó su disponibilidad</p>
                         </div>
                     </div>
-                </div>
-                <!--end top-->
-                <!--start recent update-->
-              <div class="recents_updates">
-                <h2>Recent Update</h2>
-                
-            <div class="updates">
-
-                
-                <div class="update">
-                    <div class="profile-photo">
-                        <img src="{{ asset('img/doctor2.jpg') }}" alt="Descripción de la imagen">
+                    <div class="updates">
+                        <div class="profile-photo">
+                            <img src="{{ asset('img/doctor1.jpg') }}" alt="Foto de doctor">
+                        </div>
+                        <div class="message">
+                            <p><b>Paciente Gómez</b> agendó una nueva cita</p>
+                        </div>
                     </div>
-                    <div class="message">
-                        <p><b>Babar</b>Recived his order</p>
-                    </div>
-                </div>
-                <div class="updates">
-                    <div class="profile-photo">
-                        <img src="{{ asset('img/doctor1.jpg') }}" alt="Descripción de la imagen">
-                    </div>
-                    <div class="message">
-                        <p><b>Babar</b>Recived his order</p>
-                    </div>
-                </div>
-                <div class="updates">
-                    <div class="profile-photo">
-                        <img src="{{ asset('img/doctora1.jpg') }}" alt="Descripción de la imagen">
-                    </div>
-                    <div class="message">
-                        <p><b>Babar</b>Recived his order</p>
+                    <div class="updates">
+                        <div class="profile-photo">
+                            <img src="{{ asset('img/doctora1.jpg') }}" alt="Foto de doctora">
+                        </div>
+                        <div class="message">
+                            <p><b>Dra. Ruiz</b> confirmó una consulta médica</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            <div class="sales_analytics">
+                <h2>Resumen de citas</h2>
 
-              </div>
-
-
-                  <div class="sales_analytics">
-                    <h2>Sales analytics</h2>
-
-                    <div class="item onlion">
-                        <div class="icon">
-                            <span class="material-symbols-sharp">shopping_cart</span>
-                        </div>
-                        <div class="right_text">
-                            <div class="info">
-                                <h3>onlion orders</h3>
-                                <small class="text-muted">Last seen 2 Hours</small>
-                            </div>
-                            <h5 class="danger">17%</h5>
-                            <h3>387</h3>
-                        </div>
+                <div class="item onlion">
+                    <div class="icon">
+                        <span class="material-symbols-sharp">calendar_month</span>
                     </div>
-
-                    <div class="item onlion">
-                        <div class="icon">
-                            <span class="material-symbols-sharp">shopping_cart</span>
+                    <div class="right_text">
+                        <div class="info">
+                            <h3>Citas agendadas</h3>
+                            <small class="text-muted">Últimas 2 horas</small>
                         </div>
-                        <div class="right_text">
-                            <div class="info">
-                                <h3>onlion orders</h3>
-                                <small class="text-muted">Last seen 2 Hours</small>
-                            </div>
-                            <h5 class="danger">17%</h5>
-                            <h3>387</h3>
-                        </div>
+                        <h5 class="danger">+10%</h5>
+                        <h3>45</h3>
                     </div>
+                </div>
 
-                    <div class="item onlion">
-                        <div class="icon">
-                            <span class="material-symbols-sharp">shopping_cart</span>
-                        </div>
-                        <div class="right_text">
-                            <div class="info">
-                                <h3>onlion orders</h3>
-                                <small class="text-muted">Last seen 2 Hours</small>
-                            </div>
-                            <h5 class="danger">17%</h5>
-                            <h3>387</h3>
-                        </div>
+                <div class="item onlion">
+                    <div class="icon">
+                        <span class="material-symbols-sharp">task_alt</span>
                     </div>
+                    <div class="right_text">
+                        <div class="info">
+                            <h3>Citas completadas</h3>
+                            <small class="text-muted">Últimas 2 horas</small>
+                        </div>
+                        <h5 class="danger">+5%</h5>
+                        <h3>38</h3>
+                    </div>
+                </div>
 
-                  </div>
+                <div class="item onlion">
+                    <div class="icon">
+                        <span class="material-symbols-sharp">cancel</span>
+                    </div>
+                    <div class="right_text">
+                        <div class="info">
+                            <h3>Citas canceladas</h3>
+                            <small class="text-muted">Últimas 2 horas</small>
+                        </div>
+                        <h5 class="danger">-3%</h5>
+                        <h3>7</h3>
+                    </div>
+                </div>
             </div>
-        <!--end right section-->
+        </div>
+        <!--right section end-->
     </div>
 </body>
 </html>
