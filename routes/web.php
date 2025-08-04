@@ -31,7 +31,11 @@ Route::middleware(['auth', 'role:paciente'])->prefix('paciente')->group(function
     Route::get('/dashboard', [App\Http\Controllers\Paciente\AdminController::class, 'dashboard'])->name('paciente.dashboard');
     //mas rutas del paciente
 });
+// formulario 
+use App\Http\Controllers\PacienteController;
 
+Route::get('/pacientes/crear', [PacienteController::class, 'create'])->name('pacientes.create');
+Route::post('/pacientes', [PacienteController::class, 'store'])->name('pacientes.store');
 
 //grupo rutas doctor
 Route::middleware(['auth', 'role:doctor'])->prefix('doctor')->group(function (){
