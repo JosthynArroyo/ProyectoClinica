@@ -1,9 +1,9 @@
-<!-- dashboard.blade.php -->
+<!-- resources/views/paciente/dashboard.blade.php -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Paciente - Clínica Los Ángeles</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp" rel="stylesheet" />
@@ -11,7 +11,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- Barra lateral -->
         <aside>
             <div class="top">
                 <div class="logo">
@@ -31,12 +30,10 @@
             </div>
         </aside>
 
-        <!-- Contenido principal -->
         <main>
             <h1>Mi Panel</h1>
             <div class="date"><input type="date"></div>
 
-            <!-- Tarjetas resumen -->
             <div class="insights">
                 <div class="sales">
                     <span class="material-symbols-sharp">calendar_month</span>
@@ -52,6 +49,7 @@
                     </div>
                     <small>Este mes</small>
                 </div>
+
                 <div class="expenses">
                     <span class="material-symbols-sharp">check_circle</span>
                     <div class="middle">
@@ -66,6 +64,7 @@
                     </div>
                     <small>Historial</small>
                 </div>
+
                 <div class="income">
                     <span class="material-symbols-sharp">cancel</span>
                     <div class="middle">
@@ -82,7 +81,6 @@
                 </div>
             </div>
 
-            <!-- Tabla de citas -->
             <div class="recent_order">
                 <h1>Mis Próximas Citas</h1>
                 <table>
@@ -96,12 +94,10 @@
                         <tr><td>Dra. Gómez</td><td>Pediatría</td><td class="warning">Reprogramada</td><td class="primary"><a href="#">Ver</a></td></tr>
                     </tbody>
                 </table>
-                <!-- Botón Agendar Cita -->
                 <a href="{{ route('paciente.citas.crear') }}" class="primary" style="display:inline-block; margin-top:1.5rem; font-weight:bold; color:#fff; background:var(--clr-primary); padding:0.8rem 1.5rem; border-radius:0.5rem; text-align:center;">+ Agendar Nueva Cita</a>
             </div>
         </main>
 
-        <!-- Panel derecho -->
         <div class="right">
             <div class="top">
                 <button id="menu_bar"><span class="material-symbols-sharp">menu</span></button>
