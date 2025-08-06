@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Role;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class RoleSeeder extends Seeder
 {
@@ -13,14 +13,14 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        // Desactivar chequeos de clave foránea
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        // Desactiva claves foráneas de forma compatible con cualquier motor
+        Schema::disableForeignKeyConstraints();
 
-        // Vaciar tabla roles
+        // Vacía la tabla de roles
         Role::truncate();
 
-        // Reactivar chequeos de clave foránea
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        // Vuelve a activar las claves foráneas
+        Schema::enableForeignKeyConstraints();
 
         // Insertar roles
         Role::create(['name' => 'administrador']);
