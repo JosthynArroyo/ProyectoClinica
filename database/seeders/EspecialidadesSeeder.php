@@ -1,18 +1,19 @@
 <?php
 
-// database/seeders/EspecialidadesSeeder.php
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use App\Models\Especialidad;
 
 class EspecialidadesSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-        Especialidad::insert([
-            ['nombre' => 'Cardiología'],
-            ['nombre' => 'Pediatría'],
-            ['nombre' => 'Dermatología'],
-            ['nombre' => 'Neurología']
-        ]);
+        Especialidad::truncate();
+
+        Especialidad::create(['nombre' => 'Cardiología']);
+        Especialidad::create(['nombre' => 'Pediatría']);
+        Especialidad::create(['nombre' => 'Dermatología']);
+        Especialidad::create(['nombre' => 'Medicina General']);
     }
 }

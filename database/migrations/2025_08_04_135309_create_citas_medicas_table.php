@@ -4,11 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCitasTable extends Migration
+class CreateCitasMedicasTable extends Migration
 {
     public function up()
     {
-        Schema::create('citas', function (Blueprint $table) {
+        Schema::create('citas_medicas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('paciente_id');
             $table->unsignedBigInteger('doctor_id');

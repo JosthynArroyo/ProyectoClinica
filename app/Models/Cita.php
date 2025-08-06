@@ -1,5 +1,4 @@
 <?php
-// app/Models/Cita.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Cita extends Model
 {
     use HasFactory;
+
+   
+    protected $table = 'citas_medicas';
 
     protected $fillable = [
         'paciente_id',
@@ -30,4 +32,3 @@ class Cita extends Model
         return $this->belongsTo(Especialidad::class);
     }
 }
-

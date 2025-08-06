@@ -16,8 +16,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// RUTAS ROLES
 
+
+// RUTAS ROLES
 // grupo rutas administrador
 Route::middleware(['auth', 'role:administrador'])->prefix('admin')->group(function (){
     Route::get('/dashboard', [App\Http\Controllers\Admin\AdminController::class, 'dashboard'])->name('admin.dashboard');
