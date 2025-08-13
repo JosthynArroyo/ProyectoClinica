@@ -1,0 +1,122 @@
+@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #f7fafc; /* color de fondo muy claro */
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+h1 {
+    color: #2a9d8f; /* verde azulado llamativo */
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.alert-success {
+    background-color: #e0f7fa; /* celeste suave */
+    border: 1px solid #4db6ac; /* borde verde azulado */
+    color: #00796b;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+p {
+    font-size: 1.1rem;
+    text-align: center;
+    color: #555;
+    margin-top: 20px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px; /* espacio entre filas */
+    box-shadow: 0 4px 15px rgba(42, 157, 143, 0.1);
+}
+
+.table thead tr {
+    background-color: #2a9d8f; /* verde azulado */
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.table thead th {
+    padding: 14px 12px;
+    border-radius: 12px 12px 0 0;
+}
+
+.table tbody tr {
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(42, 157, 143, 0.15);
+    transition: background-color 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #d1f0eb; /* verde azulado claro */
+}
+
+.table tbody td {
+    padding: 14px 12px;
+    color: #333;
+    font-weight: 500;
+    border-bottom: 1px solid #e0f2f1;
+}
+
+/* Estado específico para citas */
+.table tbody td:last-child {
+    font-weight: 700;
+    color: #e76f51; /* naranja llamativo */
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+        margin: 20px 10px;
+    }
+    .table thead {
+        display: none;
+    }
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+    .table tr {
+        margin-bottom: 20px;
+        box-shadow: 0 2px 6px rgba(42, 157, 143, 0.15);
+        border-radius: 12px;
+        background-color: #fff;
+    }
+    .table td {
+        padding: 12px;
+        text-align: right;
+        position: relative;
+        padding-left: 50%;
+        border: none;
+        border-bottom: 1px solid #e0f2f1;
+    }
+    .table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        padding-left: 15px;
+        font-weight: 700;
+        text-align: left;
+        color: #2a9d8f;
+    }
+}
