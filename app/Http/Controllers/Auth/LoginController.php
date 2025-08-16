@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -13,23 +14,22 @@ class LoginController extends Controller
     | Login Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
+    | Este controlador gestiona la autenticación de usuarios y redirige
+    | según su rol una vez hayan iniciado sesión correctamente.
     |
     */
 
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
+     * Redirección por defecto si no se sobreescribe.
      *
      * @var string
      */
     protected $redirectTo = '/home';
 
     /**
-     * Create a new controller instance.
+     * Crear una nueva instancia del controlador.
      *
      * @return void
      */
@@ -37,20 +37,46 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
-    } 
+    }
 
-    protected function authenticated(Request $request, $user){
-        {
+    /**
+     * Redirige al usuario autenticado según su rol.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function authenticated(Request $request, $user)
+    {
         if ($user->hasRole('administrador')) {
-            return redirect('admin/dashboard');
+            return redirect()->intended('admin/dashboard');
         } elseif ($user->hasRole('paciente')) {
-            return redirect('paciente/dashboard');
+            return redirect()->intended('paciente/dashboard');
         } elseif ($user->hasRole('doctor')) {
-            return redirect('doctor/dashboard');
+            return redirect()->intended('doctor/dashboard');
         }
-        
-        // Por si no tiene ninguno de esos roles, puedes poner un redirect por defecto:
+
+        // Redirección por defecto
         return redirect('/');
     }
+
+    /**
+     * 
+     *
+     * @return string
+     */
+    protected function redirectTo()
+    {
+        $user = Auth::user();
+
+        if ($user->hasRole('administrador')) {
+            return 'admin/dashboard';
+        } elseif ($user->hasRole('paciente')) {
+            return 'paciente/dashboard';
+        } elseif ($user->hasRole('doctor')) {
+            return 'doctor/dashboard';
+        }
+
+        return '/';
     }
 }

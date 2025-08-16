@@ -94,6 +94,12 @@
 
             <div class="recent_order">
                 <h1>Citas Recientes</h1>
+                <form action="{{ route('admin.citas.export') }}" method="GET" style="margin-bottom: 15px; text-align: right;">
+                    <button type="submit" class="btn-export">
+                        <span class="material-symbols-outlined">download</span> Exportar a Excel
+                    </button>
+                </form>**/
+
                 <table>
                     <thead>
                         <tr>
@@ -131,6 +137,7 @@
                     </tbody>
                 </table>
             </div>
+
         </main>
 
         <!-- RIGHT -->

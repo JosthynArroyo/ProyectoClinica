@@ -1,3 +1,4 @@
+<!-- resources/views/paciente/dashboard.blade.php -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,20 +21,18 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="#"><span class="material-symbols-outlined">dashboard</span><h3>Inicio</h3></a>
-                <a href="#"><span class="material-symbols-outlined">calendar_month</span><h3>Mis Citas</h3></a>
-                <a href="#"><span class="material-symbols-outlined">medical_information</span><h3>Historial Médico</h3></a>
-                <a href="#"><span class="material-symbols-outlined">chat</span><h3>Mensajes</h3></a>
-                <a href="#"><span class="material-symbols-outlined">tune</span><h3>Preferencias</h3></a>
+                <a href="{{ route('paciente.dashboard') }}"><span class="material-symbols-outlined">dashboard</span><h3>Inicio</h3></a>
+                <a href="{{ route('paciente.citas') }}"><span class="material-symbols-outlined">calendar_month</span><h3>Mis Citas</h3></a>
+                <a href="{{ route('paciente.historial') }}"><span class="material-symbols-outlined">medical_information</span><h3>Historial Médico</h3></a>
+                <a href="{{ route('paciente.mensajes') }}"><span class="material-symbols-outlined">chat</span><h3>Mensajes</h3></a>
+                <a href="{{ route('paciente.preferencias') }}"><span class="material-symbols-outlined">tune</span><h3>Preferencias</h3></a>
                 <a href="{{ route('salir') }}"><span class="material-symbols-outlined">logout</span><h3>Cerrar Sesión</h3></a>
             </div>
         </aside>
 
         <main>
             <h1>Mi Panel</h1>
-            <div class="date">
-                <input type="date">
-            </div>
+            <div class="date"><input type="date"></div>
 
             <div class="insights">
                 <div class="sales">
@@ -89,12 +88,13 @@
                         <tr><th>Doctor</th><th>Especialidad</th><th>Estado</th><th>Acción</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>Dra. Ruiz</td><td>Cardiología</td><td class="warning">Confirmada</td><td class="primary">Ver Información</td></tr>
-                        <tr><td>Dr. Torres</td><td>General</td><td class="warning">Pendiente</td><td class="primary">Ver Información</td></tr>
-                        <tr><td>Dr. Pérez</td><td>Dermatología</td><td class="warning">Pendiente</td><td class="primary">Ver Información</td></tr>
-                        <tr><td>Dra. Gómez</td><td>Pediatría</td><td class="warning">Reprogramada</td><td class="primary">Ver Información</td></tr>
+                        <tr><td>Dra. Ruiz</td><td>Cardiología</td><td class="warning">Confirmada</td><td class="primary"><a href="#">Ver</a></td></tr>
+                        <tr><td>Dr. Torres</td><td>General</td><td class="warning">Pendiente</td><td class="primary"><a href="#">Ver</a></td></tr>
+                        <tr><td>Dr. Pérez</td><td>Dermatología</td><td class="warning">Pendiente</td><td class="primary"><a href="#">Ver</a></td></tr>
+                        <tr><td>Dra. Gómez</td><td>Pediatría</td><td class="warning">Reprogramada</td><td class="primary"><a href="#">Ver</a></td></tr>
                     </tbody>
                 </table>
+                <a href="{{ route('paciente.crear-cita') }}" class="primary" style="display:inline-block; margin-top:1.5rem; font-weight:bold; color:#fff; background:var(--clr-primary); padding:0.8rem 1.5rem; border-radius:0.5rem; text-align:center;">+ Agendar Nueva Cita</a>
             </div>
         </main>
 
@@ -119,18 +119,9 @@
             <div class="recent_updates">
                 <h2>Actualizaciones</h2>
                 <div class="updates">
-                    <div class="update">
-                        <div class="profile-photo"><img src="{{ asset('img/doctor1.jpg') }}"></div>
-                        <div class="message"><p><b>Dr. Ruiz</b> confirmó tu cita</p></div>
-                    </div>
-                    <div class="update">
-                        <div class="profile-photo"><img src="{{ asset('img/doctora1.jpg') }}"></div>
-                        <div class="message"><p><b>Dra. Pérez</b> reprogramó la consulta</p></div>
-                    </div>
-                    <div class="update">
-                        <div class="profile-photo"><img src="{{ asset('img/doctor2.jpg') }}"></div>
-                        <div class="message"><p><b>Dr. Torres</b> envió un mensaje</p></div>
-                    </div>
+                    <div class="update"><div class="profile-photo"><img src="{{ asset('img/doctor1.jpg') }}"></div><div class="message"><p><b>Dr. Ruiz</b> confirmó tu cita</p></div></div>
+                    <div class="update"><div class="profile-photo"><img src="{{ asset('img/doctora1.jpg') }}"></div><div class="message"><p><b>Dra. Pérez</b> reprogramó la consulta</p></div></div>
+                    <div class="update"><div class="profile-photo"><img src="{{ asset('img/doctor2.jpg') }}"></div><div class="message"><p><b>Dr. Torres</b> envió un mensaje</p></div></div>
                 </div>
             </div>
 

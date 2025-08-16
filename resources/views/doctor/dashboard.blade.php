@@ -21,7 +21,7 @@
             </div>
             <div class="sidebar">
                 <a href="#"><span class="material-symbols-outlined">dashboard</span><h3>Inicio</h3></a>
-                <a href="#"><span class="material-symbols-outlined">event</span><h3>Mis Citas</h3></a>
+                <a href="{{ route('doctor.citas') }}"><span class="material-symbols-outlined">calendar_month</span><h3>Mis Citas</h3></a>
                 <a href="#"><span class="material-symbols-outlined">sick</span><h3>Pacientes</h3></a>
                 <a href="#"><span class="material-symbols-outlined">chat</span><h3>Mensajes</h3></a>
                 <a href="#"><span class="material-symbols-outlined">tune</span><h3>Preferencias</h3></a>
@@ -136,9 +136,30 @@
 
             <div class="sales_analytics">
                 <h2>Resumen de Citas</h2>
-                <div class="item online"><div class="icon"><span class="material-symbols-sharp">calendar_month</span></div><div class="right_text"><div class="info"><h3>Confirmadas</h3><small class="text-muted">Últimas 2h</small></div><h5 class="danger">+8%</h5><h3>10</h3></div></div>
-                <div class="item online"><div class="icon"><span class="material-symbols-sharp">task_alt</span></div><div class="right_text"><div class="info"><h3>Atendidas</h3><small class="text-muted">Últimas 2h</small></div><h5 class="danger">+5%</h5><h3>9</h3></div></div>
-                <div class="item online"><div class="icon"><span class="material-symbols-sharp">cancel</span></div><div class="right_text"><div class="info"><h3>Canceladas</h3><small class="text-muted">Últimas 2h</small></div><h5 class="danger">-1%</h5><h3>2</h3></div></div>
+                <div class="item online">
+                    <div class="icon"><span class="material-symbols-sharp">calendar_month</span></div>
+                    <div class="right_text">
+                        <div class="info"><h3>Confirmadas</h3><small class="text-muted">Últimas 2h</small></div>
+                        <h5 class="danger">+8%</h5>
+                        <h3>10</h3>
+                    </div>
+                </div>
+                <div class="item online">
+                    <div class="icon"><span class="material-symbols-sharp">task_alt</span></div>
+                    <div class="right_text">
+                        <div class="info"><h3>Atendidas</h3><small class="text-muted">Últimas 2h</small></div>
+                        <h5 class="danger">+5%</h5>
+                        <h3>9</h3>
+                    </div>
+                </div>
+                <div class="item online">
+                    <div class="icon"><span class="material-symbols-sharp">cancel</span></div>
+                    <div class="right_text">
+                        <div class="info"><h3>Canceladas</h3><small class="text-muted">Últimas 2h</small></div>
+                        <h5 class="danger">-1%</h5>
+                        <h3>2</h3>
+                    </div>
+                </div>
             </div>
 
             <div class="item add_products">

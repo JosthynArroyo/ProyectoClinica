@@ -1,50 +1,55 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DoctorController;
-use App\Http\Controllers\FrontController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CitaController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-
-
+// -----------------------------
+// RUTAS PÚBLICAS / FRONT
+// -----------------------------
+Route::get('/', function () { return view('welcome'); });
 Auth::routes();
-
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//RUTAS ROLES
-//grupo rutas administrador
-Route::middleware(['auth', 'role:administrador'])->prefix('admin')->group(function (){
+
+// -----------------------------
+// RUTAS ADMINISTRADOR
+// -----------------------------
+Route::middleware(['auth', 'role:administrador'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Admin\AdminController::class, 'dashboard'])->name('admin.dashboard');
-    //mas rutas del administrador
+    Route::get('/citas/export', [App\Http\Controllers\Admin\CitaExportController::class, 'export'])->name('admin.citas.export');
 });
 
-
-//grupo rutas paciente
-Route::middleware(['auth', 'role:paciente'])->prefix('paciente')->group(function (){
+// -----------------------------
+// RUTAS PACIENTE
+// -----------------------------
+Route::middleware(['auth', 'role:paciente'])->prefix('paciente')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Paciente\AdminController::class, 'dashboard'])->name('paciente.dashboard');
-    //mas rutas del paciente
+    Route::get('/citas', [CitaController::class, 'index'])->name('paciente.citas'); // lista citas paciente
+    Route::get('/crear-cita', [CitaController::class, 'create'])->name('paciente.crear-cita'); // formulario crear
+    Route::post('/crear-cita', [CitaController::class, 'store'])->name('paciente.crear-cita.store'); // guardar cita
+    Route::post('/citas/{id}/cancelar', [CitaController::class, 'cancelar'])->name('paciente.citas.cancelar'); // cancelar
+    Route::get('/editar-cita/{id}', [CitaController::class, 'edit'])->name('paciente.editar-cita'); // editar/reagendar
+    Route::post('/editar-cita/{id}', [CitaController::class, 'actualizar'])->name('paciente.editar-cita.update'); // actualizar cita
+    Route::view('/historial', 'paciente.historial')->name('paciente.historial'); 
+    Route::view('/mensajes', 'paciente.mensajes')->name('paciente.mensajes');
+    Route::view('/preferencias', 'paciente.preferencias')->name('paciente.preferencias');
 });
 
-
-//grupo rutas doctor
-Route::middleware(['auth', 'role:doctor'])->prefix('doctor')->group(function (){
+// -----------------------------
+// RUTAS DOCTOR
+// -----------------------------
+Route::middleware(['auth', 'role:doctor'])->prefix('doctor')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Doctor\AdminController::class, 'dashboard'])->name('doctor.dashboard');
-    //mas rutas del doctor
+    Route::get('/citas', [CitaController::class, 'indexDoctor'])->name('doctor.citas'); // lista citas doctor
+    Route::post('/citas/{id}/aceptar', [CitaController::class, 'aceptar'])->name('doctor.citas.aceptar');
+    Route::post('/citas/{id}/rechazar', [CitaController::class, 'rechazar'])->name('doctor.citas.rechazar');
+    Route::post('/citas/{id}/realizar', [CitaController::class, 'realizar'])->name('doctor.citas.realizar');
 });
 
-
-
-//Cerrar Sesión Dashboard Admin
+// -----------------------------
+// LOGOUT
+// -----------------------------
 Route::get('/salir', function () {
-    Auth::logout(); 
-    return redirect('/'); 
+    Auth::logout();
+    return redirect('/');
 })->name('salir');
-
-
