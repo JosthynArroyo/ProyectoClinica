@@ -17,3 +17,9 @@ themeToggler.addEventListener('click', () => {
     themeToggler.querySelector('span:nth-child(1)').classList.toggle('active');
     themeToggler.querySelector('span:nth-child(2)').classList.toggle('active');
 });
+
+
+document.getElementById('exportForm').addEventListener('submit', function(e) {
+    alert('Descargando archivo Excel...');
+});
+  

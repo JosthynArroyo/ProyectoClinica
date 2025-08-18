@@ -1,4 +1,3 @@
-<!-- resources/views/paciente/dashboard.blade.php -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,132 +9,179 @@
     @vite(['resources/css/dashboards/paciente.css', 'resources/js/dashboard-paciente.js'])
 </head>
 <body>
-    <div class="container">
-        <aside>
-            <div class="top">
-                <div class="logo">
-                    <h2>Paciente<span class="danger">Los Ángeles</span></h2>
-                </div>
-                <div class="close">
-                    <span class="material-symbols-outlined">close</span>
-                </div>
+<div class="container">
+    <!-- ASIDE -->
+    <aside>
+        <div class="top">
+            <div class="logo">
+                <h2>Paciente<span class="danger">Los Ángeles</span></h2>
             </div>
-            <div class="sidebar">
-                <a href="{{ route('paciente.dashboard') }}"><span class="material-symbols-outlined">dashboard</span><h3>Inicio</h3></a>
-                <a href="{{ route('paciente.citas') }}"><span class="material-symbols-outlined">calendar_month</span><h3>Mis Citas</h3></a>
-                <a href="{{ route('paciente.historial') }}"><span class="material-symbols-outlined">medical_information</span><h3>Historial Médico</h3></a>
-                <a href="{{ route('paciente.mensajes') }}"><span class="material-symbols-outlined">chat</span><h3>Mensajes</h3></a>
-                <a href="{{ route('paciente.preferencias') }}"><span class="material-symbols-outlined">tune</span><h3>Preferencias</h3></a>
-                <a href="{{ route('salir') }}"><span class="material-symbols-outlined">logout</span><h3>Cerrar Sesión</h3></a>
+            <div class="close">
+                <span class="material-symbols-outlined">close</span>
             </div>
-        </aside>
+        </div>
+        <div class="sidebar">
+            <a href="{{ route('paciente.dashboard') }}"><span class="material-symbols-outlined">dashboard</span><h3>Inicio</h3></a>
+            <a href="{{ route('paciente.citas') }}"><span class="material-symbols-outlined">calendar_month</span><h3>Mis Citas</h3></a>
+            <a href="{{ route('paciente.historial') }}"><span class="material-symbols-outlined">medical_information</span><h3>Historial Médico</h3></a>
+            <a href="{{ route('paciente.mensajes') }}"><span class="material-symbols-outlined">chat</span><h3>Mensajes</h3></a>
+            <a href="{{ route('paciente.preferencias') }}"><span class="material-symbols-outlined">tune</span><h3>Preferencias</h3></a>
+            <a href="{{ route('salir') }}"><span class="material-symbols-outlined">logout</span><h3>Cerrar Sesión</h3></a>
+        </div>
+    </aside>
 
-        <main>
-            <h1>Mi Panel</h1>
-            <div class="date"><input type="date"></div>
+    <!-- MAIN -->
+    <main>
+        <h1>Mi Panel</h1>
+        <div class="date"><input type="date"></div>
 
-            <div class="insights">
-                <div class="sales">
-                    <span class="material-symbols-sharp">calendar_month</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Citas Agendadas</h3>
-                            <h1>3</h1>
-                        </div>
-                        <div class="progress">
-                            <svg><circle r="30" cx="40" cy="40"></circle></svg>
-                            <div class="number">60%</div>
-                        </div>
+        <!-- INSIGHTS -->
+        <div class="insights">
+            <div class="sales">
+                <span class="material-symbols-sharp">calendar_month</span>
+                <div class="middle">
+                    <div class="left">
+                        <h3>Citas Agendadas</h3>
+                        <h1>{{ $totalCitas }}</h1>
                     </div>
-                    <small>Este mes</small>
-                </div>
-
-                <div class="expenses">
-                    <span class="material-symbols-sharp">check_circle</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Completadas</h3>
-                            <h1>5</h1>
-                        </div>
-                        <div class="progress">
-                            <svg><circle r="30" cx="40" cy="40"></circle></svg>
-                            <div class="number">100%</div>
-                        </div>
-                    </div>
-                    <small>Historial</small>
-                </div>
-
-                <div class="income">
-                    <span class="material-symbols-sharp">cancel</span>
-                    <div class="middle">
-                        <div class="left">
-                            <h3>Canceladas</h3>
-                            <h1>1</h1>
-                        </div>
-                        <div class="progress">
-                            <svg><circle r="30" cx="40" cy="40"></circle></svg>
-                            <div class="number">20%</div>
-                        </div>
-                    </div>
-                    <small>Este mes</small>
-                </div>
-            </div>
-
-            <div class="recent_order">
-                <h1>Mis Próximas Citas</h1>
-                <table>
-                    <thead>
-                        <tr><th>Doctor</th><th>Especialidad</th><th>Estado</th><th>Acción</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Dra. Ruiz</td><td>Cardiología</td><td class="warning">Confirmada</td><td class="primary"><a href="#">Ver</a></td></tr>
-                        <tr><td>Dr. Torres</td><td>General</td><td class="warning">Pendiente</td><td class="primary"><a href="#">Ver</a></td></tr>
-                        <tr><td>Dr. Pérez</td><td>Dermatología</td><td class="warning">Pendiente</td><td class="primary"><a href="#">Ver</a></td></tr>
-                        <tr><td>Dra. Gómez</td><td>Pediatría</td><td class="warning">Reprogramada</td><td class="primary"><a href="#">Ver</a></td></tr>
-                    </tbody>
-                </table>
-                <a href="{{ route('paciente.crear-cita') }}" class="primary" style="display:inline-block; margin-top:1.5rem; font-weight:bold; color:#fff; background:var(--clr-primary); padding:0.8rem 1.5rem; border-radius:0.5rem; text-align:center;">+ Agendar Nueva Cita</a>
-            </div>
-        </main>
-
-        <div class="right">
-            <div class="top">
-                <button id="menu_bar"><span class="material-symbols-sharp">menu</span></button>
-                <div class="theme-toggler">
-                    <span class="material-symbols-sharp active">light_mode</span>
-                    <span class="material-symbols-sharp">dark_mode</span>
-                </div>
-                <div class="profile">
-                    <div class="info">
-                        <p><b>Paciente</b></p>
-                        <p>Panel Personal</p>
-                    </div>
-                    <div class="profile-photo">
-                        <img src="{{ asset('img/paciente1.jpg') }}" alt="Foto del paciente">
+                    <div class="progress">
+                        <svg><circle r="30" cx="40" cy="40"></circle></svg>
                     </div>
                 </div>
+                <small>Este mes</small>
             </div>
 
-            <div class="recent_updates">
-                <h2>Actualizaciones</h2>
-                <div class="updates">
-                    <div class="update"><div class="profile-photo"><img src="{{ asset('img/doctor1.jpg') }}"></div><div class="message"><p><b>Dr. Ruiz</b> confirmó tu cita</p></div></div>
-                    <div class="update"><div class="profile-photo"><img src="{{ asset('img/doctora1.jpg') }}"></div><div class="message"><p><b>Dra. Pérez</b> reprogramó la consulta</p></div></div>
-                    <div class="update"><div class="profile-photo"><img src="{{ asset('img/doctor2.jpg') }}"></div><div class="message"><p><b>Dr. Torres</b> envió un mensaje</p></div></div>
+            <div class="expenses">
+                <span class="material-symbols-sharp">check_circle</span>
+                <div class="middle">
+                    <div class="left">
+                        <h3>Completadas</h3>
+                        <h1>{{ $totalCitasRealizadas }}</h1>
+                    </div>
+                    <div class="progress">
+                        <svg><circle r="30" cx="40" cy="40"></circle></svg>
+                    </div>
+                </div>
+                <small>Historial</small>
+            </div>
+
+            <div class="income">
+                <span class="material-symbols-sharp">cancel</span>
+                <div class="middle">
+                    <div class="left">
+                        <h3>Canceladas</h3>
+                        <h1>{{ $totalCitas - $totalCitasRealizadas - $totalCitasPendientes }}</h1>
+                    </div>
+                    <div class="progress">
+                        <svg><circle r="30" cx="40" cy="40"></circle></svg>
+                    </div>
+                </div>
+                <small>Este mes</small>
+            </div>
+        </div>
+
+        <!-- Citas Recientes -->
+        <div class="recent_order">
+            <h1>Mis Próximas Citas</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Doctor</th>
+                        <th>Especialidad</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($citas as $cita)
+                        <tr>
+                            <td>{{ $cita->doctor->name ?? 'Sin asignar' }}</td>
+                            <td>{{ $cita->especialidad->nombre ?? '—' }}</td>
+                            <td>{{ $cita->fecha }}</td>
+                            <td>{{ $cita->hora }}</td>
+                            <td>
+                                <span class="badge {{ $cita->estado === 'pendiente' ? 'warning' : ($cita->estado === 'realizada' ? 'success' : ($cita->estado === 'confirmada' ? 'info' : 'danger')) }}">
+                                    {{ ucfirst($cita->estado) }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{{ route('paciente.editar-cita', $cita->id) }}" class="btn btn-primary btn-sm">Ver / Editar</a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6">No tienes próximas citas.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+
+            <a href="{{ route('paciente.crear-cita') }}" class="primary" style="display:inline-block; margin-top:1.5rem; font-weight:bold; color:#fff; background:var(--clr-primary); padding:0.8rem 1.5rem; border-radius:0.5rem; text-align:center;">
+                + Agendar Nueva Cita
+            </a>
+        </div>
+    </main>
+
+    <!-- RIGHT PANEL -->
+    <div class="right">
+        <div class="top">
+            <button id="menu_bar"><span class="material-symbols-sharp">menu</span></button>
+            <div class="theme-toggler">
+                <span class="material-symbols-sharp active">light_mode</span>
+                <span class="material-symbols-sharp">dark_mode</span>
+            </div>
+            <div class="profile">
+                <div class="info">
+                    <p><b>Paciente</b></p>
+                    <p>Panel Personal</p>
+                </div>
+                <div class="profile-photo">
+                    <img src="{{ asset('img/paciente1.jpg') }}" alt="Foto del paciente">
                 </div>
             </div>
+        </div>
 
-            <div class="sales_analytics">
-                <h2>Resumen</h2>
-                <div class="item online"><div class="icon"><span class="material-symbols-sharp">calendar_month</span></div><div class="right_text"><div class="info"><h3>Agendadas</h3><small class="text-muted">Este mes</small></div><h5 class="danger">+12%</h5><h3>3</h3></div></div>
-                <div class="item online"><div class="icon"><span class="material-symbols-sharp">task_alt</span></div><div class="right_text"><div class="info"><h3>Completadas</h3><small class="text-muted">Este mes</small></div><h5 class="danger">+4%</h5><h3>5</h3></div></div>
-                <div class="item online"><div class="icon"><span class="material-symbols-sharp">cancel</span></div><div class="right_text"><div class="info"><h3>Canceladas</h3><small class="text-muted">Este mes</small></div><h5 class="danger">-1%</h5><h3>1</h3></div></div>
+        <div class="recent_updates">
+            <h2>Actualizaciones</h2>
+            <div class="updates">
+                @foreach($citas->take(3) as $cita)
+                    <div class="update">
+                        <div class="profile-photo"><img src="{{ asset('img/doctor1.jpg') }}"></div>
+                        <div class="message">
+                            <p><b>{{ $cita->doctor->name ?? 'Doctor' }}</b> actualizó tu cita: {{ ucfirst($cita->estado) }}</p>
+                        </div>
+                    </div>
+                @endforeach
             </div>
+        </div>
 
-            <div class="item add_products">
-                <div><span class="material-symbols-sharp">add</span></div>
+        <div class="sales_analytics">
+            <h2>Resumen</h2>
+            <div class="item online">
+                <div class="icon"><span class="material-symbols-sharp">calendar_month</span></div>
+                <div class="right_text">
+                    <div class="info"><h3>Agendadas</h3><small class="text-muted">Este mes</small></div>
+                    <h3>{{ $totalCitas }}</h3>
+                </div>
+            </div>
+            <div class="item online">
+                <div class="icon"><span class="material-symbols-sharp">task_alt</span></div>
+                <div class="right_text">
+                    <div class="info"><h3>Completadas</h3><small class="text-muted">Este mes</small></div>
+                    <h3>{{ $totalCitasRealizadas }}</h3>
+                </div>
+            </div>
+            <div class="item online">
+                <div class="icon"><span class="material-symbols-sharp">cancel</span></div>
+                <div class="right_text">
+                    <div class="info"><h3>Canceladas</h3><small class="text-muted">Este mes</small></div>
+                    <h3>{{ $totalCitas - $totalCitasRealizadas - $totalCitasPendientes }}</h3>
+                </div>
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>

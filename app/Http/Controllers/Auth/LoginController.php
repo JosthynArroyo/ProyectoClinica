@@ -9,43 +9,18 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | Este controlador gestiona la autenticación de usuarios y redirige
-    | según su rol una vez hayan iniciado sesión correctamente.
-    |
-    */
-
     use AuthenticatesUsers;
 
-    /**
-     * Redirección por defecto si no se sobreescribe.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
+    // ⚠️ Quitamos redirectTo para no forzar /home
+    // protected $redirectTo = '/home';
 
-    /**
-     * Crear una nueva instancia del controlador.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
     }
 
-    /**
-     * Redirige al usuario autenticado según su rol.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\User $user
-     * @return \Illuminate\Http\RedirectResponse
-     */
+    // Redirección después del login
     protected function authenticated(Request $request, $user)
     {
         if ($user->hasRole('administrador')) {
@@ -56,15 +31,10 @@ class LoginController extends Controller
             return redirect()->intended('doctor/dashboard');
         }
 
-        // Redirección por defecto
         return redirect('/');
     }
 
-    /**
-     * 
-     *
-     * @return string
-     */
+    // Alternativa usada por Laravel si existe
     protected function redirectTo()
     {
         $user = Auth::user();

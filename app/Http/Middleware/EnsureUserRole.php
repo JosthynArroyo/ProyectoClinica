@@ -8,23 +8,27 @@ use Symfony\Component\HttpFoundation\Response;
 
 class EnsureUserRole
 {
-    
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        if(empty($roles)){
+        // Si no se pasan roles, se permite el acceso
+        if (empty($roles)) {
             return $next($request);
         }
-        
-        if(!$request->user()){
+
+        // Si no está autenticado, redirigir a login
+        if (!$request->user()) {
             return redirect('/login');
         }
 
-        foreach($roles as $role){
-            if($request->user()->roles->contains('name',$role)){
+        // Verificar si el usuario tiene alguno de los roles requeridos
+        foreach ($roles as $role) {
+            // Aquí asumes que $request->user()->roles es colección de Role models
+            if ($request->user()->roles->contains('name', $role)) {
                 return $next($request);
             }
         }
 
-        return redirect('/')->with("error","Acceso denegado");
+        // Si no tiene roles permitidos, redirigir con error
+        return redirect('/')->with('error', 'Acceso denegado');
     }
 }

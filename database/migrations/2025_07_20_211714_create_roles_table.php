@@ -11,19 +11,28 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->timestamps();
-        });
+        // Crear tabla roles solo si no existe
+        if (!Schema::hasTable('roles')) {
+            Schema::create('roles', function (Blueprint $table) {
+                $table->id();
+                $table->string('name')->unique();
+                $table->string('description')->nullable(); // Campo adicional útil
+                $table->timestamps();
+            });
+        }
 
-
-        Schema::create('role_user', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
-            $table->foreignId('role_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
-        });
+        // Crear tabla pivot role_user solo si no existe
+        if (!Schema::hasTable('role_user')) {
+            Schema::create('role_user', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
+                $table->foreignId('role_id')->constrained()->onDelete('cascade');
+                $table->timestamps();
+                
+                // Índice único para evitar duplicados
+                $table->unique(['user_id', 'role_id']);
+            });
+        }
     }
 
     /**
@@ -31,7 +40,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
         Schema::dropIfExists('role_user');
+        Schema::dropIfExists('roles');
     }
 };
