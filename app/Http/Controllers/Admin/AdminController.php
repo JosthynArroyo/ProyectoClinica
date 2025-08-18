@@ -7,11 +7,19 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function dashboard() {
-    return view('admin.dashboard', 'paciente.dashboard', [
-        'totalUsuarios' => 25,
-        'totalDoctores' => 10,
-        'totalCitas' => 50
-    ]);
-}
+    public function dashboardAdmin() {
+        return view('admin.dashboard', [
+            'totalUsuarios' => 25,
+            'totalDoctores' => 10,
+            'totalCitas' => 50
+        ]);
+    }
+
+    public function dashboardPaciente() {
+        return view('paciente.dashboard', [
+            'totalUsuarios' => 25,
+            'totalDoctores' => 10,
+            'totalCitas' => 50
+        ]);
+    }
 }
