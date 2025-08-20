@@ -20,7 +20,6 @@ class Cita extends Model
         'estado',
     ];
 
-    // Estados disponibles
     const ESTADO_PENDIENTE   = 'pendiente';
     const ESTADO_CONFIRMADA  = 'confirmada';
     const ESTADO_CANCELADA   = 'cancelada';

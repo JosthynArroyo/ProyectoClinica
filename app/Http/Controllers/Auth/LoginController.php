@@ -11,8 +11,6 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    // ⚠️ Quitamos redirectTo para no forzar /home
-    // protected $redirectTo = '/home';
 
     public function __construct()
     {
@@ -34,7 +32,6 @@ class LoginController extends Controller
         return redirect('/');
     }
 
-    // Alternativa usada por Laravel si existe
     protected function redirectTo()
     {
         $user = Auth::user();

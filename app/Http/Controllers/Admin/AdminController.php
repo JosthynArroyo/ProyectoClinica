@@ -11,19 +11,16 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        // Totales
         $totalCitas = Cita::count();
         $totalCitasPendientes = Cita::where('estado', Cita::ESTADO_PENDIENTE)->count();
         $totalCitasRealizadas = Cita::where('estado', Cita::ESTADO_REALIZADA)->count();
 
-        // Últimas 5 citas
         $citas = Cita::with(['paciente', 'doctor'])
                     ->orderByDesc('fecha')
                     ->orderByDesc('hora')
                     ->take(5)
                     ->get();
 
-        // Estadísticas últimas 2 horas
         $dosHorasAntes = Carbon::now()->subHours(2);
 
         $citasAgendadas2h = Cita::where('created_at', '>=', $dosHorasAntes)->count();
