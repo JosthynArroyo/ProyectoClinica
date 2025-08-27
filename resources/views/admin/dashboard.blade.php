@@ -114,6 +114,15 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- MONITOREO EN TIEMPO REAL CON HILOS Y LAMBDAS -->
+        <div class="real-time-monitor" style="margin-top: 30px;">
+            <h2>Monitoreo en tiempo real</h2>
+            <p>Esta sección usa tareas concurrentes y lambdas para simular actualizaciones automáticas de estado.</p>
+            <ul id="realTimeUpdates">
+                <li>Cargando actividad en tiempo real...</li>
+            </ul>
+        </div>
     </main>
 
     <!-- RIGHT -->
@@ -191,5 +200,30 @@
         </div>
     </div>
 </div>
+
+<!-- SCRIPT PARA ACTUALIZACIONES EN TIEMPO REAL -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const updatesList = document.getElementById('realTimeUpdates');
+        let counter = 0;
+
+        const tasks = [
+            () => `<b>Paciente #${++counter}</b> agendó una cita.`,
+            () => `<b>Dr. #${++counter}</b> confirmó una consulta.`,
+            () => `<b>Cita #${++counter}</b> fue cancelada.`,
+        ];
+
+        setInterval(() => {
+            const randomTask = tasks[Math.floor(Math.random() * tasks.length)];
+            const li = document.createElement('li');
+            li.innerHTML = randomTask();
+            updatesList.prepend(li);
+            if (updatesList.children.length > 5) {
+                updatesList.removeChild(updatesList.lastChild);
+            }
+        }, 3000);
+    });
+</script>
+
 </body>
 </html>

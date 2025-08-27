@@ -7,6 +7,8 @@ use App\Models\Cita;
 use App\Models\User;
 use App\Models\Especialidad;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\EnviarConfirmacionCitaJob;
+use App\Events\CitaAgendada;
 
 class CitaController extends Controller
 {
@@ -36,7 +38,7 @@ class CitaController extends Controller
         return view('paciente.crear-cita', compact('doctores', 'especialidades'));
     }
 
-    // Guardar nueva cita
+    // Guardar nueva cita (con Job y Event)
     public function store(Request $request)
     {
         $request->validate([
@@ -46,7 +48,7 @@ class CitaController extends Controller
             'hora' => 'required',
         ]);
 
-        Cita::create([
+        $cita = Cita::create([
             'paciente_id' => Auth::id(),
             'doctor_id' => $request->doctor_id,
             'especialidad_id' => $request->especialidad_id,
@@ -55,8 +57,14 @@ class CitaController extends Controller
             'estado' => Cita::ESTADO_PENDIENTE,
         ]);
 
+        // Dispara evento para notificar al doctor (Actividad 2)
+        event(new CitaAgendada($cita));
+
+        // Enviar confirmación en segundo plano (Actividad 1)
+        EnviarConfirmacionCitaJob::dispatch($cita);
+
         return redirect()->route('paciente.citas')
-            ->with('success', 'Cita creada con éxito.');
+            ->with('success', 'Cita creada con éxito. Confirmación enviada y doctor notificado.');
     }
 
     // Cancelar cita
@@ -121,7 +129,6 @@ class CitaController extends Controller
     // DOCTOR
     // -------------------------------
 
-    // Listar citas del doctor
     public function indexDoctor()
     {
         $citas = Cita::where('doctor_id', Auth::id())
@@ -131,7 +138,6 @@ class CitaController extends Controller
         return view('doctor.citas', compact('citas'));
     }
 
-    // Aceptar cita (confirmada)
     public function aceptar($id)
     {
         $cita = Cita::findOrFail($id);
@@ -150,7 +156,6 @@ class CitaController extends Controller
         return back()->with('success', 'Cita confirmada.');
     }
 
-    // Rechazar cita (cancelada)
     public function rechazar($id)
     {
         $cita = Cita::findOrFail($id);
@@ -169,7 +174,6 @@ class CitaController extends Controller
         return back()->with('success', 'Cita rechazada.');
     }
 
-    // Marcar cita como realizada
     public function realizar($id)
     {
         $cita = Cita::findOrFail($id);

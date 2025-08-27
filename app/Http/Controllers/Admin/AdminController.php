@@ -16,12 +16,17 @@ class AdminController extends Controller
         $totalCitasPendientes = Cita::where('estado', Cita::ESTADO_PENDIENTE)->count();
         $totalCitasRealizadas = Cita::where('estado', Cita::ESTADO_REALIZADA)->count();
 
-        // Últimas 5 citas
+        // Últimas 5 citas con programación funcional (lambda)
         $citas = Cita::with(['paciente', 'doctor'])
-                    ->orderByDesc('fecha')
-                    ->orderByDesc('hora')
-                    ->take(5)
-                    ->get();
+            ->get()
+            ->sortByDesc(fn($c) => $c->fecha . ' ' . $c->hora) // Ordenar por fecha/hora
+            ->take(5)
+            ->map(fn($c) => [
+                'paciente' => $c->paciente->nombre ?? 'N/A',
+                'doctor' => $c->doctor->nombre ?? 'Sin asignar',
+                'fecha' => $c->fecha . ' ' . $c->hora,
+                'estado' => $c->estado,
+            ]);
 
         // Estadísticas últimas 2 horas
         $dosHorasAntes = Carbon::now()->subHours(2);
