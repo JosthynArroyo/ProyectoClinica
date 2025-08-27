@@ -5,7 +5,7 @@
 .container {
     max-width: 900px;
     margin: 40px auto;
-    background-color: #f7fafc; /* color de fondo muy claro */
+    background-color: #f7fafc; 
     padding: 30px 40px;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);

@@ -19,7 +19,7 @@
                     <li><a href="{{ url('/') }}">Inicio</a></li>
                     <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
                     <li><a href="{{ route('register') }}">Registrarse</a></li>
-                    <li><a href="#footer">Contacto</a></li>
+                    <li><a href="{{ route('contacto') }}">Contacto</a></li>
                 </ul>
             </nav>
         </div>
