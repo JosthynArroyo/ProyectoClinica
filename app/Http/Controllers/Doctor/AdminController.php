@@ -19,7 +19,6 @@ class AdminController extends Controller
             ->orderBy('hora', 'asc')
             ->get();
 
-        // Estadísticas
         $citasHoy = $citas->count();
         $citasRealizadas = $citas->where('estado', 'realizada')->count();
         $citasPendientes = $citas->where('estado', 'pendiente')->count();

@@ -15,7 +15,7 @@ class User extends Authenticatable
         'email',
         'password',
         'active',
-        'role', // Aunque uses relación roles, este campo puede quedar para info rápida
+        'role',
     ];
 
     protected $hidden = [
@@ -28,13 +28,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // Relación muchos a muchos con Role
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
 
-    // Función helper para verificar si usuario tiene cierto rol
     public function hasRole($roleName)
     {
         return $this->roles()->where('name', $roleName)->exists();

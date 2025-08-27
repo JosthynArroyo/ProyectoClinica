@@ -14,10 +14,8 @@ class ExportCitasTest extends TestCase
 
     public function test_exportar_citas_generar_archivo_excel()
     {
-        // Deshabilitar middleware para enfocarnos en la funcionalidad
         $this->withoutMiddleware();
 
-        // Crear usuarios simples
         $admin = User::factory()->create([
             'name' => 'Admin Test',
             'email' => 'admin@test.com',
@@ -33,16 +31,13 @@ class ExportCitasTest extends TestCase
             'email' => 'doctor@test.com',
         ]);
 
-        // Autenticar como admin
         $this->actingAs($admin);
 
-        // Crear especialidad
         $especialidad = Especialidad::factory()->create([
             'nombre' => 'Cardiología',
             'descripcion' => 'Especialidad del corazón',
         ]);
 
-        // Crear cita
         $cita = Cita::factory()->create([
             'paciente_id' => $paciente->id,
             'doctor_id' => $doctor->id,
@@ -52,31 +47,26 @@ class ExportCitasTest extends TestCase
             'estado' => 'pendiente',
         ]);
 
-        // Verificar que la cita existe en la base de datos
         $this->assertDatabaseHas('citas_medicas', [
             'id' => $cita->id,
             'paciente_id' => $paciente->id,
             'doctor_id' => $doctor->id,
         ]);
 
-        // Probar la exportación
         $response = $this->get(route('admin.citas.export'));
 
-        // Verificaciones
         $response->assertStatus(200);
         $response->assertHeader('content-type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         
-        // Verificar que tiene el header de descarga
         $contentDisposition = $response->headers->get('content-disposition');
         $this->assertStringContainsString('attachment', $contentDisposition);
     }
 
     public function test_usuario_no_autenticado_no_puede_exportar()
     {
-        // Sin autenticación y sin deshabilitar middleware
+
         $response = $this->get(route('admin.citas.export'));
 
-        // Debería redirigir o dar error
         $this->assertTrue(
             in_array($response->status(), [302, 401, 403]),
             'Usuario no autenticado no debería acceder a la exportación'
@@ -85,13 +75,11 @@ class ExportCitasTest extends TestCase
 
     public function test_exportar_citas_con_datos_minimos()
     {
-        // Test con datos mínimos para verificar que el export funciona
         $this->withoutMiddleware();
         
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        // Crear solo los datos mínimos necesarios
         $paciente = User::factory()->create();
         $doctor = User::factory()->create();
         $especialidad = Especialidad::factory()->create();
@@ -107,10 +95,8 @@ class ExportCitasTest extends TestCase
 
         $response = $this->get(route('admin.citas.export'));
         
-        // Verificar que la exportación funciona
         $response->assertStatus(200);
         
-        // Verificar que es un archivo Excel
         $this->assertTrue(
             str_contains($response->headers->get('content-type'), 'spreadsheetml') ||
             str_contains($response->headers->get('content-type'), 'excel'),

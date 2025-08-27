@@ -15,7 +15,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('active')->default(0);
-            $table->string('role')->default('paciente');  // Este campo puede ser redundante, pero está
+            $table->string('role')->default('paciente'); 
             $table->rememberToken();
             $table->timestamps();
         });
@@ -35,7 +35,6 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
 
-        // También necesitarás migración para tabla pivote users_roles:
         Schema::create('role_user', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('role_id')->constrained()->cascadeOnDelete();

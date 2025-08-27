@@ -9,18 +9,24 @@ use Carbon\Carbon;
 
 class AdminController extends Controller
 {
+    /**
+     * Muestra el panel de control del administrador.
+     *
+     * @return \Illuminate\View\View
+     */
     public function dashboard()
     {
-        // Totales
+        // Totales de citas
         $totalCitas = Cita::count();
         $totalCitasPendientes = Cita::where('estado', Cita::ESTADO_PENDIENTE)->count();
         $totalCitasRealizadas = Cita::where('estado', Cita::ESTADO_REALIZADA)->count();
 
-        // Últimas 5 citas con programación funcional (lambda)
+        // Obtener las 5 citas más recientes
         $citas = Cita::with(['paciente', 'doctor'])
-            ->get()
-            ->sortByDesc(fn($c) => $c->fecha . ' ' . $c->hora) // Ordenar por fecha/hora
+            ->orderByDesc('fecha')
+            ->orderByDesc('hora')
             ->take(5)
+            ->get()
             ->map(fn($c) => [
                 'paciente' => $c->paciente->nombre ?? 'N/A',
                 'doctor' => $c->doctor->nombre ?? 'Sin asignar',
@@ -28,15 +34,22 @@ class AdminController extends Controller
                 'estado' => $c->estado,
             ]);
 
-        // Estadísticas últimas 2 horas
+        // Fechas para consultas de las últimas 2 horas
         $dosHorasAntes = Carbon::now()->subHours(2);
 
+        // Citas agendadas en las últimas 2 horas
         $citasAgendadas2h = Cita::where('created_at', '>=', $dosHorasAntes)->count();
+        
+        // Citas completadas en las últimas 2 horas
         $citasCompletadas2h = Cita::where('estado', Cita::ESTADO_REALIZADA)
-                                  ->where('updated_at', '>=', $dosHorasAntes)
+                                  ->where('fecha', '>=', $dosHorasAntes->toDateString())
+                                  ->where('hora', '>=', $dosHorasAntes->toTimeString())
                                   ->count();
+
+        // Citas canceladas en las últimas 2 horas
         $citasCanceladas2h = Cita::where('estado', Cita::ESTADO_CANCELADA)
-                                 ->where('updated_at', '>=', $dosHorasAntes)
+                                 ->where('fecha', '>=', $dosHorasAntes->toDateString())
+                                 ->where('hora', '>=', $dosHorasAntes->toTimeString())
                                  ->count();
 
         return view('admin.dashboard', [

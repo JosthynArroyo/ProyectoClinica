@@ -11,20 +11,17 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        $userId = Auth::id(); // ID del paciente logueado
+        $userId = Auth::id();
 
-        // Obtener todas las citas del paciente ordenadas por fecha
         $citas = Cita::where('paciente_id', $userId)
                       ->orderBy('fecha', 'asc')
                       ->get();
 
-        // Contadores para estadísticas
         $totalCitas = $citas->count();
         $totalCitasPendientes = $citas->where('estado', 'pendiente')->count();
         $totalCitasRealizadas = $citas->where('estado', 'realizada')->count();
         $totalCitasCanceladas = $citas->where('estado', 'cancelada')->count();
 
-        // Contadores de últimas 2 horas (ejemplo, puedes adaptarlo)
         $citasAgendadas2h = $citas->where('created_at', '>=', now()->subHours(2))->count();
         $citasCompletadas2h = $citas->where('estado', 'realizada')
                                      ->where('updated_at', '>=', now()->subHours(2))
