@@ -14,7 +14,7 @@
     <aside>
         <div class="top">
             <div class="logo">
-                <h2>Paciente<span class="danger">Los Ángeles</span></h2>
+                <h2>Paciente <span class="danger"> Los Ángeles</span></h2>
             </div>
             <div class="close">
                 <span class="material-symbols-outlined">close</span>

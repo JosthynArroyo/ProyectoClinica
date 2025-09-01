@@ -103,6 +103,8 @@
           font-size: 0.75rem;
           font-weight: 600;
           text-transform: uppercase;
+          display: inline-block;
+          margin-bottom: 0.5rem; /* 🔹 Esto da separación del botón */
         }
 
         .badge-pendiente { background-color: #ffecb3; color: #8a6d3b; }
@@ -170,7 +172,7 @@
                 <div class="flex flex-col items-end justify-center">
                     <span class="badge badge-{{ $cita->estado }}">{{ ucfirst($cita->estado) }}</span>
                     @if(!in_array($cita->estado, ['cancelada','realizada']))
-                    <div class="actions mt-2">
+                    <div class="actions">
                         <form action="{{ route('paciente.citas.cancelar', $cita->id) }}" method="POST" style="display:inline-block">
                             @csrf
                             <button type="submit">Cancelar</button>

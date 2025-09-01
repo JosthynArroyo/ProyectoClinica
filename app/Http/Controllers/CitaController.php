@@ -12,11 +12,6 @@ use App\Events\CitaAgendada;
 
 class CitaController extends Controller
 {
-    /**
-     * Muestra la lista de citas del paciente autenticado.
-     *
-     * @return \Illuminate\View\View
-     */
     public function index()
     {
         $citas = Cita::where('paciente_id', Auth::id())
@@ -26,11 +21,6 @@ class CitaController extends Controller
         return view('paciente.citas', compact('citas'));
     }
 
-    /**
-     * Muestra el formulario para crear una nueva cita.
-     *
-     * @return \Illuminate\View\View
-     */
     public function create()
     {
         $doctores = User::whereHas('roles', function ($q) {
@@ -42,12 +32,6 @@ class CitaController extends Controller
         return view('paciente.crear-cita', compact('doctores', 'especialidades'));
     }
 
-    /**
-     * Almacena una nueva cita en la base de datos.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -66,22 +50,13 @@ class CitaController extends Controller
             'estado' => Cita::ESTADO_PENDIENTE,
         ]);
 
-        // Dispara evento para notificar al doctor (Actividad 2)
         event(new CitaAgendada($cita));
-
-        // Enviar confirmación en segundo plano (Actividad 1)
         EnviarConfirmacionCitaJob::dispatch($cita);
 
         return redirect()->route('paciente.citas')
             ->with('success', 'Cita creada con éxito. Confirmación enviada y doctor notificado.');
     }
 
-    /**
-     * Cancela una cita.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function cancelar($id)
     {
         $cita = Cita::findOrFail($id);
@@ -100,12 +75,6 @@ class CitaController extends Controller
         return back()->with('success', 'Cita cancelada.');
     }
 
-    /**
-     * Muestra el formulario para editar una cita.
-     *
-     * @param int $id
-     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
-     */
     public function edit($id)
     {
         $cita = Cita::findOrFail($id);
@@ -121,13 +90,6 @@ class CitaController extends Controller
         return view('paciente.editar-cita', compact('cita'));
     }
 
-    /**
-     * Actualiza una cita existente.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function actualizar(Request $request, $id)
     {
         $cita = Cita::findOrFail($id);
@@ -141,7 +103,6 @@ class CitaController extends Controller
             'hora' => 'required',
         ]);
 
-        // Se usa el método update para hacer el código más limpio
         $cita->update([
             'fecha' => $request->fecha,
             'hora' => $request->hora,
@@ -152,15 +113,6 @@ class CitaController extends Controller
             ->with('success', 'Cita reagendada.');
     }
 
-    // -------------------------------
-    // DOCTOR
-    // -------------------------------
-
-    /**
-     * Muestra la lista de citas del doctor autenticado.
-     *
-     * @return \Illuminate\View\View
-     */
     public function indexDoctor()
     {
         $citas = Cita::where('doctor_id', Auth::id())
@@ -170,12 +122,6 @@ class CitaController extends Controller
         return view('doctor.citas', compact('citas'));
     }
 
-    /**
-     * Acepta una cita.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function aceptar($id)
     {
         $cita = Cita::findOrFail($id);
@@ -194,12 +140,6 @@ class CitaController extends Controller
         return back()->with('success', 'Cita confirmada.');
     }
 
-    /**
-     * Rechaza una cita.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function rechazar($id)
     {
         $cita = Cita::findOrFail($id);
@@ -218,12 +158,6 @@ class CitaController extends Controller
         return back()->with('success', 'Cita rechazada.');
     }
 
-    /**
-     * Marca una cita como realizada.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function realizar($id)
     {
         $cita = Cita::findOrFail($id);

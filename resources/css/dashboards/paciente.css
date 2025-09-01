@@ -596,6 +596,8 @@ Media Query for Phoens
 
     aside .logo h2{
         display: inline;
+        align-items: center;
+        gap: 0.4rem;
     }
 
     aside .sidebar h3{

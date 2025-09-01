@@ -89,3 +89,48 @@ a {
     color: #333;
     margin-top: 10px;
 }
+
+@media (max-width: 1024px) {
+    .container {
+        width: 90%;
+    }
+}
+
+/* Tablets y móviles */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        border-radius: 20px;
+    }
+
+    .toggle-container {
+        width: 100%;
+        border-radius: 0;
+        padding: 40px 20px;
+    }
+
+    .form-container.sign-up {
+        width: 100%;
+        padding: 40px 20px;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+    .form-container form {
+        padding: 0 20px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    button {
+        padding: 10px 30px;
+        font-size: 11px;
+    }
+
+    .toggle-container p {
+        font-size: 14px;
+    }
+}

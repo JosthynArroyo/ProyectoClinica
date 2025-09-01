@@ -1,18 +1,17 @@
 <?php
-
-// app/Jobs/EnviarConfirmacionCitaJob.php
 namespace App\Jobs;
 
 use App\Models\Cita;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable; 
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
 class EnviarConfirmacionCitaJob implements ShouldQueue
 {
-    use InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $cita;
 
@@ -23,7 +22,6 @@ class EnviarConfirmacionCitaJob implements ShouldQueue
 
     public function handle()
     {
-        
         Log::info("Confirmación enviada a: {$this->cita->paciente->nombre} ({$this->cita->paciente->email})");
     }
 }

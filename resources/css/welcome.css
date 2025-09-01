@@ -411,3 +411,157 @@ td {
     color: #cbd5e1;
     font-size: 14px;
 }
+
+/* ===================== */
+/* ===== RESPONSIVE ===== */
+/* ===================== */
+
+/* Tablets (pantallas medianas) */
+@media (max-width: 1024px) {
+    .header-txt h1 {
+        font-size: 60px;
+    }
+
+    .header-txt span {
+        font-size: 20px;
+    }
+
+    .welcome-2 {
+        padding: 80px 100px;
+    }
+
+    .prices-1 {
+        padding: 80px 100px;
+    }
+
+    .services-txt p {
+        padding: 30px 60px;
+    }
+}
+
+/* Tablets pequeñas y móviles en horizontal */
+@media (max-width: 768px) {
+    .menu label {
+        display: block;
+    }
+
+    .menu .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,0.9);
+        display: none;
+        flex-direction: column;
+    }
+
+    .menu .navbar ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .menu .navbar ul li {
+        width: 100%;
+    }
+
+    .menu .navbar ul li a {
+        padding: 15px;
+        text-align: center;
+        display: block;
+    }
+
+    #menu:checked ~ .navbar {
+        display: flex;
+    }
+
+    .header-txt h1 {
+        font-size: 45px;
+    }
+
+    .header-txt p {
+        font-size: 16px;
+    }
+
+    .welcome {
+        flex-direction: column;
+    }
+
+    .welcome-1,
+    .welcome-2 {
+        width: 100%;
+        padding: 60px 30px;
+    }
+
+    .prices {
+        flex-direction: column;
+    }
+
+    .prices-1,
+    .prices-2 {
+        width: 100%;
+        padding: 60px 30px;
+    }
+
+    .services-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .services-1 {
+        margin: 20px 0;
+        width: 90%;
+    }
+
+    .header-dir {
+        flex-direction: column;
+    }
+}
+
+/* Móviles pequeños (pantallas menores a 480px) */
+@media (max-width: 480px) {
+    .menu {
+        padding: 10px 20px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .header-txt h1 {
+        font-size: 35px;
+    }
+
+    .header-txt span {
+        font-size: 16px;
+    }
+
+    .header-txt p {
+        font-size: 14px;
+    }
+
+    h2 {
+        font-size: 35px;
+    }
+
+    .btn-1 {
+        font-size: 16px;
+        padding: 10px 18px;
+    }
+
+    .services-txt p {
+        padding: 20px;
+    }
+
+    .personal-1 {
+        width: 100%;
+    }
+
+    .personal-1 img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .dir p {
+        font-size: 15px;
+    }
+}
