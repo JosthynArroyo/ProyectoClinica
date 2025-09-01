@@ -89,3 +89,108 @@ a {
     color: #333;
     margin-top: 10px;
 }
+
+/* =========================
+   RESPONSIVIDAD 1200px → 270px
+   ========================= */
+
+/* Máximo 1200px */
+@media (max-width: 1200px) {
+    .container {
+        width: 90%;
+    }
+}
+
+/* Máximo 992px */
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+        border-radius: 20px;
+        min-height: auto;
+    }
+
+    .toggle-container {
+        width: 100%;
+        border-radius: 0 0 200px 200px;
+        padding: 40px 20px;
+    }
+
+    .form-container.sign-up {
+        width: 100%;
+        padding: 30px 20px;
+    }
+}
+
+/* Máximo 768px */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        padding: 20px;
+    }
+
+    .container {
+        width: 100%;
+        min-height: auto;
+        border-radius: 15px;
+    }
+
+    .toggle-container {
+        padding: 30px 15px;
+        border-radius: 0 0 150px 150px;
+    }
+
+    .form-container form {
+        padding: 0 20px;
+    }
+
+    button {
+        font-size: 11px;
+        padding: 10px 30px;
+    }
+}
+
+/* Máximo 576px */
+@media (max-width: 576px) {
+    .toggle-container {
+        font-size: 14px;
+        padding: 25px 15px;
+    }
+
+    input {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    button {
+        font-size: 10px;
+        padding: 8px 20px;
+    }
+}
+
+/* Mínimo 270px */
+@media (max-width: 270px) {
+    body {
+        font-size: 10px;
+    }
+
+    .container {
+        border-radius: 10px;
+        flex-direction: column;
+    }
+
+    .toggle-container {
+        font-size: 12px;
+        padding: 15px;
+        border-radius: 0 0 100px 100px;
+    }
+
+    input {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+
+    button {
+        font-size: 9px;
+        padding: 6px 15px;
+    }
+}

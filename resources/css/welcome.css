@@ -411,3 +411,165 @@ td {
     color: #cbd5e1;
     font-size: 14px;
 }
+/* ====== RESPONSIVIDAD DE 1200px A 270px ====== */
+
+/* Máximo 1200px */
+@media (max-width: 1200px) {
+    .welcome-2,
+    .prices-1 {
+        padding: 100px 80px;
+    }
+}
+
+/* Máximo 992px */
+@media (max-width: 992px) {
+    .header-txt h1 {
+        font-size: 60px;
+    }
+
+    .header-txt span {
+        font-size: 20px;
+    }
+
+    .welcome {
+        flex-direction: column;
+    }
+
+    .welcome-1, 
+    .welcome-2 {
+        width: 100%;
+        padding: 60px 40px;
+    }
+
+    .prices {
+        flex-direction: column;
+    }
+
+    .prices-1, 
+    .prices-2 {
+        width: 100%;
+        padding: 60px 40px;
+    }
+
+    .services-group {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* Máximo 768px */
+@media (max-width: 768px) {
+    .menu .navbar ul {
+        display: none;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.85);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        border-radius: 6px;
+    }
+
+    .menu .navbar ul li {
+        width: 100%;
+    }
+
+    .menu .navbar ul li a {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .menu label {
+        display: block;
+    }
+
+    #menu:checked ~ .navbar ul {
+        display: flex;
+    }
+
+    .header-txt h1 {
+        font-size: 45px;
+    }
+
+    h2 {
+        font-size: 40px;
+    }
+
+    .services-txt p {
+        padding: 20px;
+    }
+}
+
+/* Máximo 576px */
+@media (max-width: 576px) {
+    .header {
+        min-height: 80vh;
+        padding: 20px;
+    }
+
+    .header-txt h1 {
+        font-size: 28px;
+        letter-spacing: 1px;
+    }
+
+    .header-txt span {
+        font-size: 16px;
+    }
+
+    .header-txt p {
+        font-size: 14px;
+    }
+
+    .btn-1 {
+        font-size: 14px;
+        padding: 6px 14px;
+    }
+
+    .header-dir {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .dir {
+        max-width: 100%;
+    }
+
+    .personal-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .personal-1 {
+        width: 90%;
+        padding: 15px;
+    }
+}
+
+/* Mínimo 270px */
+@media (max-width: 270px) {
+    body {
+        font-size: 10px;
+    }
+
+    .header-txt h1 {
+        font-size: 18px;
+    }
+
+    .header-txt span {
+        font-size: 12px;
+    }
+
+    .header-txt p {
+        font-size: 11px;
+    }
+
+    .btn-1 {
+        font-size: 10px;
+        padding: 4px 10px;
+    }
+
+    .personal-1 {
+        width: 100%;
+        padding: 8px;
+    }
+}
