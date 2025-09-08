@@ -133,6 +133,34 @@ class AdminController extends Controller
             'active'  => ['nullable','in:0,1'],
         ]);
 
+        $currentRoleId   = optional($user->roles()->first())->id;
+        $requestedRoleId = (int) $request->role_id;
+        $isAdminTarget   = $user->roles()->where('name','administrador')->exists();
+
+        // Evitar que cualquiera cambie el rol de una cuenta Administrador
+        if ($isAdminTarget && $requestedRoleId !== (int) $currentRoleId) {
+            return back()->withErrors(['No puedes cambiar el rol de una cuenta con rol Administrador.']);
+        }
+
+        // Evitar que un admin se baje su propio rol
+        if ($user->id === Auth::id() && $requestedRoleId !== (int) $currentRoleId) {
+            return back()->withErrors(['No puedes cambiar tu propio rol.']);
+        }
+
+        // Evitar dejar el sistema sin administradores (defensa adicional)
+        if (!$isAdminTarget && $this->roleNameById($requestedRoleId) === 'administrador') {
+            // permitido elevar a admin; no aplica la restricción de "último admin"
+        } else {
+            $seEstáQuitandoAdmin = $isAdminTarget && $requestedRoleId !== (int) $currentRoleId;
+            if ($seEstáQuitandoAdmin) {
+                $totalAdmins = User::whereHas('roles', fn($q)=>$q->where('name','administrador'))->count();
+                if ($totalAdmins <= 1) {
+                    return back()->withErrors(['No puedes quitar el rol del único Administrador del sistema.']);
+                }
+            }
+        }
+
+        // Actualizar datos base
         $user->name  = $request->name;
         $user->email = $request->email;
 
@@ -142,17 +170,17 @@ class AdminController extends Controller
 
         $user->save();
 
-        $role = Role::findOrFail($request->role_id);
-        $user->roles()->sync([$role->id]);
+        // Sincronizar rol (si no es administrador objetivo)
+        $roleIdToSync = $isAdminTarget ? $currentRoleId : $requestedRoleId;
+        $user->roles()->sync([$roleIdToSync]);
 
         if (Auth::id() === $user->id) {
             Auth::setUser($user->fresh('roles'));
-            return redirect()->route('home')->with('success', 'Tu perfil y rol fueron actualizados.');
+            return redirect()->route('home')->with('success', 'Tu perfil fue actualizado.');
         }
 
         return back()->with('success', 'Usuario actualizado.');
     }
-
 
     public function usuarioDestroy(User $user)
     {
@@ -161,7 +189,7 @@ class AdminController extends Controller
         }
 
         if ($user->hasRole('administrador')) {
-            return back()->withErrors(['No puedes eliminar cuentas con rol administrador.']);
+            return back()->withErrors(['No puedes eliminar cuentas con rol Administrador.']);
         }
 
         $user->roles()->detach();
@@ -270,5 +298,77 @@ class AdminController extends Controller
             ->get(['users.id','users.name']);
 
         return response()->json($doctores);
+    }
+
+    /* =========================
+     *  Pacientes (solo admin)
+     * ========================= */
+    public function crearPaciente()
+    {
+        return view('admin.paciente-create');
+    }
+
+    public function storePaciente(Request $request)
+    {
+        $rules = [
+            'name'             => ['required','string','max:255'],
+            'email'            => ['required','email','max:255','unique:users,email'],
+            'password'         => ['required','string','min:8','confirmed','regex:/^(?=.*[A-Za-z])(?=.*\d).+$/'],
+            'telefono'         => ['nullable','digits:10'],
+            'dni'              => ['required','digits:10','unique:users,dni'],
+            'direccion'        => ['nullable','string','max:255'],
+            'fecha_nacimiento' => ['nullable','date','before:today'],
+            'sexo'             => ['nullable','in:Masculino,Femenino,Otro'],
+        ];
+
+        $messages = [
+            'required'       => 'El :attribute es obligatorio.',
+            'email'          => 'Ingresa un correo válido.',
+            'unique'         => 'Este :attribute ya está registrado.',
+            'digits'         => 'El :attribute debe tener exactamente :digits dígitos.',
+            'password.min'   => 'La contraseña debe tener al menos 8 caracteres.',
+            'password.regex' => 'La contraseña debe incluir letras y números.',
+            'confirmed'      => 'La confirmación de :attribute no coincide.',
+            'before'         => 'La :attribute debe ser anterior a hoy.',
+            'in'             => 'Selecciona un valor válido para :attribute.',
+        ];
+
+        $attributes = [
+            'name'                  => 'nombre',
+            'email'                 => 'correo',
+            'password'              => 'contraseña',
+            'password_confirmation' => 'confirmación de contraseña',
+            'telefono'              => 'teléfono',
+            'dni'                   => 'número de cédula',
+            'direccion'             => 'dirección',
+            'fecha_nacimiento'      => 'fecha de nacimiento',
+            'sexo'                  => 'sexo',
+        ];
+
+        $data = $request->validate($rules, $messages, $attributes);
+
+        $user = new User();
+        $user->name  = $data['name'];
+        $user->email = $data['email'];
+        $user->password = Hash::make($data['password']);
+        $user->active  = true;
+        $user->telefono = $data['telefono'] ?? null;
+        $user->dni = $data['dni'];
+        $user->direccion = $data['direccion'] ?? null;
+        $user->fecha_nacimiento = $data['fecha_nacimiento'] ?? null;
+        $user->sexo = $data['sexo'] ?? null;
+        $user->save();
+
+        $role = Role::where('name', 'paciente')->firstOrFail();
+        $user->roles()->sync([$role->id]);
+
+        return redirect()->route('admin.usuarios.index')->with('success', 'Paciente creado correctamente.');
+    }
+
+    /** Utilidad interna para obtener el nombre del rol por id */
+    private function roleNameById(?int $roleId): ?string
+    {
+        if (!$roleId) return null;
+        return optional(Role::find($roleId))->name;
     }
 }

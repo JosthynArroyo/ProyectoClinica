@@ -17,16 +17,8 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-    {{-- Botón de logout solo si está autenticado --}}
-    @auth
-        <form method="POST" action="{{ route('logout') }}" style="text-align: right; margin: 20px;">
-            @csrf
-            <button type="submit"
-                style="background-color: #512da8; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600;">
-                Cerrar sesión
-            </button>
-        </form>
-    @endauth
+    {{-- Sección para header o acciones adicionales --}}
+    @yield('header-actions')
 
     <main>
         @yield('content')

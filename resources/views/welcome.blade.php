@@ -16,8 +16,18 @@
             </label>
             <nav class="navbar">
                 <ul>
-                    <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
-                    <li><a href="{{ route('register') }}">Registrarse</a></li>
+                    @if (Route::has('login'))
+                        @auth
+                            <li><a href="{{ route('home') }}">Mi Panel</a></li>
+                        @else
+                            <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
+                        @endauth
+                    @endif
+
+                    @if (Route::has('register') && !Auth::check())
+                        <li><a href="{{ route('register') }}">Registrarse</a></li>
+                    @endif
+
                     <li><a href="{{ route('contacto.form') }}">Contacto</a></li>
                 </ul>
             </nav>
@@ -28,7 +38,16 @@
                 <h1>Clinica</h1>
                 <span>Los Ángeles</span>
                 <p>Sistema de gestión médica para agendar citas fácilmente y recibir atención especializada.</p>
-                <a href="{{ route('register') }}" class="btn-1">Agendar Cita</a>
+
+                @auth
+                    <a href="{{ route('paciente.dashboard') }}" class="btn-1">Agendar Cita</a>
+                @else
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="btn-1">Agendar Cita</a>
+                    @elseif (Route::has('login'))
+                        <a href="{{ route('login') }}" class="btn-1">Agendar Cita</a>
+                    @endif
+                @endauth
             </div>
 
             <div class="header-dir">
@@ -132,7 +151,16 @@
                     </tr>
                 </tbody>
             </table>
-            <a href="{{ route('register') }}" class="btn-1">Agendar Cita</a>
+
+            @auth
+                <a href="{{ route('paciente.dashboard') }}" class="btn-1">Agendar Cita</a>
+            @else
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="btn-1">Agendar Cita</a>
+                @elseif (Route::has('login'))
+                    <a href="{{ route('login') }}" class="btn-1">Agendar Cita</a>
+                @endif
+            @endauth
         </div>
 
         <div class="prices-2"></div>
@@ -158,7 +186,7 @@
                 <p>Dr. Juan Torres — Cardiología. Prevención y manejo integral de riesgo cardiovascular.</p>
             </div>
         </div>
-        <a href="{{ route('register') }}" class="btn-1">Agendar Cita</a>
+        
     </section>
 
     <footer id="footer">

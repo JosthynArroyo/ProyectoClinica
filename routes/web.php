@@ -9,11 +9,9 @@ use App\Http\Controllers\Paciente\AdminController as PacienteDashboardController
 use App\Http\Controllers\Doctor\AdminController as DoctorDashboardController;
 use App\Http\Controllers\ContactoController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', fn() => view('welcome'));
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/especialidades/{especialidad}/doctores', [AdminDashboardController::class, 'doctoresPorEspecialidad'])
     ->name('especialidades.doctores');
@@ -43,6 +41,10 @@ Route::middleware(['auth', 'role:administrador'])->prefix('admin')->group(functi
 
     Route::get('/doctores/crear', [AdminDashboardController::class, 'crearDoctor'])->name('admin.doctores.crear');
     Route::post('/doctores', [AdminDashboardController::class, 'storeDoctor'])->name('admin.doctores.store');
+
+    // SOLO admin registra pacientes
+    Route::get('/pacientes/crear', [AdminDashboardController::class, 'crearPaciente'])->name('admin.pacientes.crear');
+    Route::post('/pacientes', [AdminDashboardController::class, 'storePaciente'])->name('admin.pacientes.store');
 
     Route::get('/citas/export', [ExportCitasController::class, 'exportarCitas'])->name('admin.citas.export');
 });

@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp" rel="stylesheet" />
     <meta name="dashboard-resumen-url" content="{{ route('admin.dashboard.resumen') }}">
     @vite(['resources/css/dashboards/admin.css', 'resources/js/dashboard-admin.js', 'resources/js/dashboard-admin-extras.js'])
-
 </head>
 <body>
 <div class="container">
@@ -26,10 +25,10 @@
 
             <a href="{{ route('admin.usuarios.index') }}"><span class="material-symbols-outlined">person</span><h3>Usuarios</h3></a>
 
-            <a href="#"><span class="material-symbols-outlined">calendar_month</span><h3>Citas Médicas</h3></a>
-
             <a href="{{ route('admin.doctores.crear') }}"><span class="material-symbols-outlined">person_add</span><h3>Registrar Doctor</h3></a>
 
+            {{-- NUEVO: Registrar Paciente --}}
+            <a href="{{ route('admin.pacientes.crear') }}"><span class="material-symbols-outlined">group_add</span><h3>Registrar Paciente</h3></a>
 
             <a href="{{ route('admin.perfil.edit') }}"><span class="material-symbols-outlined">account_circle</span><h3>Perfil</h3></a>
             <a href="{{ route('salir') }}"><span class="material-symbols-outlined">logout</span><h3>Cerrar Sesión</h3></a>

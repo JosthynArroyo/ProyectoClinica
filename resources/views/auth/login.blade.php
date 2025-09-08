@@ -1,16 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión | Clínica Médica</title>
+    {{-- CSS propio de la página de login --}}
     @vite('resources/css/login.css')
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
-</head>
-<body>
+
     <!-- Botón Volver -->
     <a href="{{ url('/') }}" class="back-btn" aria-label="Volver al inicio">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -20,8 +14,9 @@
     </a>
 
     <div class="container">
+        {{-- Columna izquierda: formulario de inicio de sesión --}}
         <div class="form-container sign-in">
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('login') }}" id="loginForm">
                 @csrf
                 <h1>Iniciar Sesión</h1>
 
@@ -44,29 +39,29 @@
                 </div>
                 @error('password')<span class="error">{{ $message }}</span>@enderror
 
-                <a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
+
                 <button type="submit">Ingresar</button>
             </form>
         </div>
 
+        {{-- Columna derecha: bienvenida (sin registro) --}}
         <div class="toggle-container">
             <h1>Bienvenido</h1>
-            <p>Regístrate para agendar y gestionar tus citas médicas fácilmente</p>
-            <a href="{{ route('register') }}">
-                <button>Registrarse</button>
-            </a>
+            <p>Inicia sesión para agendar y gestionar tus citas médicas fácilmente.</p>
+            
         </div>
     </div>
 
     <script>
+        // Mostrar/ocultar contraseña
         document.querySelectorAll('.toggle-eye').forEach(function(b){
-            b.addEventListener('click',function(){
-                var id=b.getAttribute('data-target');var i=document.getElementById(id);if(!i)return;
-                i.type=i.type==='password'?'text':'password';
+            b.addEventListener('click', function(){
+                var id = b.getAttribute('data-target');
+                var i = document.getElementById(id);
+                if(!i) return;
+                i.type = i.type === 'password' ? 'text' : 'password';
                 b.classList.toggle('is-on');
             });
         });
     </script>
-</body>
-</html>
 @endsection

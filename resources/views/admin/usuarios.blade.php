@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios | Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <style>
         :root{
@@ -11,10 +11,7 @@
             --clr-info-dark:#7d8da1;--clr-info-light:#ccd5e5;--clr-dark:#363949;--bg:#f6f6f9;
             --radius:24px;--shadow:0 2rem 3rem rgba(132,139,200,.18);
             --grid-cols: 260px 2.2fr 220px 1.3fr 260px;
-            --v-sep:#d7ddea;         /* divisores verticales */
-            --row-sep:#dee4f1;       /* separador entre filas */
-            --head-sep:#d3d9e6;      /* bordes del header */
-            --card-border:#cfd7e6;
+            --v-sep:#d7ddea;--row-sep:#dee4f1;--head-sep:#d3d9e6;--card-border:#cfd7e6;
         }
         *{box-sizing:border-box}
         body{margin:0;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Ubuntu,Arial;background:var(--bg);color:var(--clr-dark)}
@@ -38,7 +35,6 @@
         .card{background:var(--clr-white);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;border:1.5px solid var(--card-border)}
         .muted{color:var(--clr-info-dark);font-size:.95rem}
 
-        /* ===== Tabla con header y filas en CSS Grid ===== */
         table{width:100%;border-collapse:separate;border-spacing:0}
         thead tr.headergrid{display:grid;grid-template-columns:var(--grid-cols);gap:0}
         thead th{
@@ -52,18 +48,10 @@
         tbody td{padding:0;border-bottom:1.5px solid var(--row-sep)}
         tbody tr:hover{background:#f9fbff}
 
-        .rowgrid{
-            display:grid;grid-template-columns:var(--grid-cols);gap:0;
-            align-items:stretch;                 /* que todas las celdas tengan la misma altura */
-        }
-        /* Borde vertical a altura completa (sin padding) */
-        .rowgrid > div{
-            border-right:1.5px solid var(--v-sep);
-            display:flex;                        /* para que .cell se estire */
-        }
+        .rowgrid{display:grid;grid-template-columns:var(--grid-cols);gap:0;align-items:stretch}
+        .rowgrid > div{border-right:1.5px solid var(--v-sep);display:flex}
         .rowgrid > div:last-child{border-right:none}
 
-        /* El padding se aplica dentro, así los bordes recorren todo */
         .cell{display:flex;flex-direction:column;gap:6px;padding:12px;width:100%}
         .help{font-size:.82rem;color:#7a859f}
 
@@ -141,9 +129,9 @@
                     @endphp
 
                     <form id="update-{{ $u->id }}" action="{{ route('admin.usuarios.update', $u) }}" method="POST">@csrf @method('PUT')</form>
-                    @if(!$esAdmin)
+                    @unless($esAdmin)
                         <form id="delete-{{ $u->id }}" action="{{ route('admin.usuarios.destroy', $u) }}" method="POST">@csrf @method('DELETE')</form>
-                    @endif
+                    @endunless
 
                     <tr>
                         <td colspan="5">
@@ -165,11 +153,16 @@
 
                                 <div>
                                     <div class="cell">
-                                        <select class="select" form="update-{{ $u->id }}" name="role_id" required>
-                                            @foreach($roles as $r)
-                                                <option value="{{ $r->id }}" @selected($roleIdActual===$r->id)>{{ ucfirst($r->name) }}</option>
-                                            @endforeach
-                                        </select>
+                                        @if($esAdmin)
+                                            <span class="chip" title="No editable para administradores">Administrador</span>
+                                            <input type="hidden" form="update-{{ $u->id }}" name="role_id" value="{{ $roleIdActual }}">
+                                        @else
+                                            <select class="select" form="update-{{ $u->id }}" name="role_id" required>
+                                                @foreach($roles->whereNotIn('name',['administrador']) as $r)
+                                                    <option value="{{ $r->id }}" @selected($roleIdActual===$r->id)>{{ ucfirst($r->name) }}</option>
+                                                @endforeach
+                                            </select>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -193,12 +186,12 @@
                                             <button form="update-{{ $u->id }}" type="submit" class="btn btn-save">
                                                 <span class="material-symbols-outlined">save</span> Guardar
                                             </button>
-                                            @if(!$esAdmin)
+                                            @unless($esAdmin)
                                                 <button form="delete-{{ $u->id }}" type="submit" class="btn btn-del"
                                                         onclick="return confirm('¿Eliminar usuario {{ $u->name }}?');">
                                                     <span class="material-symbols-outlined">delete</span> Eliminar
                                                 </button>
-                                            @endif
+                                            @endunless
                                         </div>
                                     </div>
                                 </div>
