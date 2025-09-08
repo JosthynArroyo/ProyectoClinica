@@ -670,10 +670,8 @@ Media Query for Phoens
       position: absolute;
       left: 1rem;
     }
+}
 
-
-
-    
-
-
+.dark-theme-variables .insights > div small{
+  color:#cbd5e1;
 }

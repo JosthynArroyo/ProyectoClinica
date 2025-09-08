@@ -1,5 +1,5 @@
 <?php
-// app/Models/Especialidad.php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,5 +11,11 @@ class Especialidad extends Model
 
     protected $table = 'especialidades';
 
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre', 'descripcion'];
+
+    public function doctores()
+    {
+        return $this->belongsToMany(User::class, 'doctor_especialidad', 'especialidad_id', 'user_id')
+            ->withTimestamps();
+    }
 }

@@ -6,43 +6,48 @@ use Illuminate\Http\Request;
 use App\Models\Cita;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ExportCitasController extends Controller
 {
-    public function exportarCitas()
+    public function exportarCitas(): StreamedResponse
     {
-        try {
-            $citas = Cita::with(['paciente', 'doctor'])->get();
+        $citas = Cita::with(['paciente', 'doctor'])->get();
 
-            $spreadsheet = new Spreadsheet();
-            $sheet = $spreadsheet->getActiveSheet();
-            $sheet->setCellValue('A1', 'Paciente');
-            $sheet->setCellValue('B1', 'Doctor');
-            $sheet->setCellValue('C1', 'Fecha');
-            $sheet->setCellValue('D1', 'Hora');
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
 
-            $fila = 2;
-            foreach ($citas as $cita) {
-                $sheet->setCellValue("A$fila", $cita->paciente->name);
-                $sheet->setCellValue("B$fila", $cita->doctor->name ?? 'Sin asignar');
-                $sheet->setCellValue("C$fila", $cita->fecha);
-                $sheet->setCellValue("D$fila", $cita->hora);
-                $fila++;
-            }
+        // Encabezados
+        $sheet->setCellValue('A1', 'Paciente');
+        $sheet->setCellValue('B1', 'Doctor');
+        $sheet->setCellValue('C1', 'Fecha');
+        $sheet->setCellValue('D1', 'Hora');
 
-            // Guardar en storage
-            $fileName = 'citas_' . now()->format('Ymd_His') . '.xlsx';
-            $filePath = storage_path("app/public/{$fileName}");
-
-            $writer = new Xlsx($spreadsheet);
-            $writer->save($filePath);
-
-            // Descargar y borrar después de enviar
-            return response()->download($filePath)->deleteFileAfterSend(true);
-
-        } catch (\Exception $e) {
-            return back()->with('error', 'Error al exportar citas: ' . $e->getMessage());
+        // Datos
+        $fila = 2;
+        foreach ($citas as $cita) {
+            $sheet->setCellValue("A{$fila}", $cita->paciente->name ?? 'Sin paciente');
+            $sheet->setCellValue("B{$fila}", $cita->doctor->name ?? 'Sin asignar');
+            $sheet->setCellValue("C{$fila}", $cita->fecha);
+            $sheet->setCellValue("D{$fila}", $cita->hora);
+            $fila++;
         }
+
+        // Nombre
+        $fileName = 'citas_' . now()->format('Ymd_His') . '.xlsx';
+
+        // Stream directo al navegador
+        return response()->streamDownload(function () use ($spreadsheet) {
+            // Limpia cualquier salida previa (evita corrupción del ZIP XLSX)
+            if (ob_get_length()) {
+                ob_end_clean();
+            }
+            $writer = new Xlsx($spreadsheet);
+            $writer->save('php://output');
+        }, $fileName, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+            'Pragma' => 'no-cache',
+        ]);
     }
 }

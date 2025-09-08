@@ -36,7 +36,8 @@ class Cita extends Model
     
     protected $casts = [
         'fecha' => 'date',
-        'hora'  => 'datetime:H:i',
+        'hora'  => 'string',
+        'activo' => 'boolean',
     ];
 
     public function paciente()

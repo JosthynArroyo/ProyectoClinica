@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
-
 
     public function __construct()
     {
@@ -18,7 +18,25 @@ class LoginController extends Controller
         $this->middleware('auth')->only('logout');
     }
 
-    // Redirección después del login
+    protected function validateLogin(Request $request)
+    {
+        $request->validate(
+            [
+                $this->username() => 'required|email',
+                'password' => 'required|string',
+            ],
+            [
+                $this->username().'.required' => 'Ingrese su correo electrónico.',
+                $this->username().'.email' => 'Ingrese un correo electrónico válido.',
+                'password.required' => 'Ingrese su contraseña.',
+            ],
+            [
+                $this->username() => 'correo electrónico',
+                'password' => 'contraseña',
+            ]
+        );
+    }
+
     protected function authenticated(Request $request, $user)
     {
         if ($user->hasRole('administrador')) {
@@ -45,5 +63,21 @@ class LoginController extends Controller
         }
 
         return '/';
+    }
+
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        throw ValidationException::withMessages([
+            $this->username() => ['Las credenciales no coinciden con nuestros registros.'],
+        ]);
+    }
+
+    protected function sendLockoutResponse(Request $request)
+    {
+        $seconds = $this->limiter()->availableIn($this->throttleKey($request));
+
+        throw ValidationException::withMessages([
+            $this->username() => ['Demasiados intentos. Inténtelo nuevamente en '.$seconds.' segundos.'],
+        ])->status(429);
     }
 }

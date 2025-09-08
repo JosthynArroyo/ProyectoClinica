@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Especialidad;
 
 class User extends Authenticatable
 {
@@ -15,7 +16,12 @@ class User extends Authenticatable
         'email',
         'password',
         'active',
-        'role',
+        'telefono',
+        'dni',
+        'direccion',
+        'fecha_nacimiento',
+        'sexo',
+        'avatar',
     ];
 
     protected $hidden = [
@@ -25,7 +31,8 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'password'          => 'hashed',
+        'fecha_nacimiento'  => 'date',
     ];
 
     public function roles()
@@ -33,8 +40,15 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
-    public function hasRole($roleName)
+    public function hasRole(string $roleName): bool
     {
         return $this->roles()->where('name', $roleName)->exists();
     }
+
+    public function especialidades()
+    {
+        return $this->belongsToMany(Especialidad::class, 'doctor_especialidad', 'user_id', 'especialidad_id')
+            ->withTimestamps();
+    }
+
 }

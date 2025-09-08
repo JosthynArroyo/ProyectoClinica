@@ -1,189 +1,202 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Citas Médicas</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-          --clr-primary: #7380ec;
-          --clr-primary-variant: #111e88;
-          --clr-success: #41f1b6;
-          --clr-danger: #ff7782;
-          --clr-white: #fff;
-          --clr-dark: #363949;
-          --clr-dark-variant: #677483;
-          --clr-light: rgba(132, 139, 200, 0.18);
-          --card-border-radius: 1.5rem;
-          --card-padding: 1.5rem;
-          --box-shadow: 0 2rem 3rem var(--clr-light);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mis Citas Médicas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-        body {
-          font-family: "Poppins", sans-serif;
-          background-color: #f6f6f9;
-          color: var(--clr-dark-variant);
-        }
+  <style>
+    :root{
+      --primary:#6b74ff;
+      --primary-2:#8ea1ff;
+      --danger:#ff6b81;
+      --success:#41f1b6;
+      --ink:#1f2330;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --ring:rgba(107,116,255,.35);
+      --shadow:0 20px 35px rgba(31,35,48,.10), 0 8px 14px rgba(31,35,48,.06);
+      --radius-lg:22px;
+      --radius-sm:14px;
+    }
 
-        .container {
-          max-width: 900px;
-          margin: 2rem auto;
-          padding: 0 1rem;
-        }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      color:var(--ink);
+      background:radial-gradient(1200px 500px at 20% -10%, #f1f3ff 0%, #ffffff 55%) fixed;
+    }
 
-        h1 {
-          font-size: 2rem;
-          font-weight: 800;
-          color: var(--clr-dark);
-          margin-bottom: 1rem;
-        }
+    .page{ max-width:980px; margin:42px auto; padding:0 20px; }
 
-        .back-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          background-color: var(--clr-primary);
-          color: var(--clr-white);
-          padding: 0.6rem 1.2rem;
-          border-radius: 0.8rem;
-          font-weight: 500;
-          text-decoration: none;
-          margin-bottom: 1.5rem;
-          transition: all 0.3s ease;
-        }
+    /* Header */
+    .page-header{
+      padding:24px 24px 18px;
+      background:linear-gradient(135deg, var(--primary), var(--primary-2));
+      border-radius:22px;
+      box-shadow:var(--shadow);
+    }
+    .header-panel{
+      background:#ffffff;
+      border-radius:16px;
+      padding:18px 20px;
+      box-shadow:0 10px 20px rgba(16,24,40,.06);
+      display:flex; align-items:center; gap:14px; justify-content:space-between;
+    }
+    .header-left{ display:flex; align-items:center; gap:14px; }
+    .title{ margin:0; font-size:1.6rem; font-weight:800; color:#1f2330 }
+    .subtitle{ margin:2px 0 0; color:#667085; font-weight:600; font-size:.95rem }
 
-        .back-btn:hover {
-          background-color: var(--clr-primary-variant);
-        }
+    .btn-back{
+      background:linear-gradient(135deg, var(--primary), var(--primary-2));
+      color:#fff; text-decoration:none; font-weight:800; letter-spacing:.2px;
+      padding:10px 14px; border-radius:12px; display:inline-flex; align-items:center; gap:8px;
+      box-shadow:0 10px 18px rgba(107,116,255,.25);
+      border:none; cursor:pointer;
+    }
 
-        .alert {
-          padding: 0.8rem 1rem;
-          border-radius: 0.6rem;
-          margin-bottom: 1rem;
-          font-weight: 500;
-        }
+    /* Alerts */
+    .alerts{ margin:18px 4px 4px }
+    .alert{
+      border-radius:12px; padding:12px 14px; font-weight:600; margin:10px 0;
+    }
+    .alert-success{ background:#dff7ea; color:#137a5a; border:1px solid #c7f1de }
+    .alert-danger{  background:#ffe8ec; color:#a21736; border:1px solid #ffd6df }
 
-        .alert-success { background-color: #d4f7e2; color: var(--clr-success); }
-        .alert-danger { background-color: #ffe0e3; color: var(--clr-danger); }
+    /* Cards list */
+    .list{ margin-top:18px; display:grid; gap:18px }
 
-        .cita-card {
-          background-color: var(--clr-white);
-          padding: var(--card-padding);
-          border-radius: var(--card-border-radius);
-          box-shadow: var(--box-shadow);
-          display: grid;
-          grid-template-columns: 1fr auto;
-          align-items: center;
-          gap: 1rem;
-          margin-bottom: 1rem;
-          transition: all 0.3s ease;
-        }
+    .appt{
+      background:#fff; border:1px solid #eef1ff; border-radius:var(--radius-lg);
+      box-shadow:var(--shadow); padding:18px 20px;
+      display:grid; grid-template-columns:1fr auto; gap:14px; align-items:center;
+    }
+    .appt:hover{ box-shadow:0 16px 28px rgba(31,35,48,.12) }
 
-        .cita-card:hover {
-          box-shadow: none;
-        }
+    .appt-title{ margin:0 0 6px 0; font-weight:800; color:#24283a; font-size:1.05rem }
+    .appt-meta{ margin:0; color:#60657a; font-weight:600; font-size:.93rem }
+    .appt-meta + .appt-meta{ margin-top:6px }
 
-        .cita-info h3 {
-          font-weight: 600;
-          color: var(--clr-dark);
-          margin-bottom: 0.25rem;
-        }
+    .right{ display:flex; flex-direction:column; align-items:flex-end; gap:10px }
 
-        .cita-info p {
-          font-size: 0.875rem;
-          color: var(--clr-dark-variant);
-          margin-bottom: 0.2rem;
-        }
+    /* Pills (estado) */
+    .pill{ display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px;
+           font-weight:800; font-size:.8rem; border:1px solid transparent }
+    .pill.pending{  background:#fff6d8; color:#8a6d3b; border-color:#ffe9a8 }
+    .pill.info{     background:#eef2ff; color:#3a47d5; border-color:#dee6ff }
+    .pill.danger{   background:#ffe9ef; color:#a21736; border-color:#ffd6e0 }
+    .pill.success{  background:#e9fff6; color:#128462; border-color:#c9ffe9 }
 
-        .badge {
-          padding: 0.25rem 0.75rem;
-          border-radius: 0.5rem;
-          font-size: 0.75rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          display: inline-block;
-          margin-bottom: 0.5rem; /* 🔹 Esto da separación del botón */
-        }
+    /* Actions */
+    .actions{ display:flex; gap:10px; }
+    .btn{
+      appearance:none; border:none; cursor:pointer; font-weight:800; letter-spacing:.2px;
+      padding:10px 14px; border-radius:12px; transition: transform .05s ease, filter .2s ease;
+      text-decoration:none; display:inline-flex; align-items:center;
+    }
+    .btn:active{ transform:translateY(1px) scale(.995) }
+    .btn-cancel{ background:#ff7782; color:#fff; box-shadow:0 10px 18px rgba(255,119,130,.25) }
+    .btn-cancel:hover{ filter:brightness(1.05) }
+    .btn-primary{
+      color:#fff; background:linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow:0 12px 24px rgba(107,116,255,.30);
+    }
+    .btn-primary:hover{ filter:brightness(1.03) }
 
-        .badge-pendiente { background-color: #ffecb3; color: #8a6d3b; }
-        .badge-confirmada { background-color: #cce5ff; color: #004085; }
-        .badge-cancelada { background-color: #f8d7da; color: #721c24; }
-        .badge-realizada { background-color: #d4edda; color: #155724; }
+    /* Empty state */
+    .empty{
+      background:#fff; border:1px solid #eef1ff; border-radius:18px; padding:24px; text-align:center;
+      color:#60657a; font-weight:600;
+    }
 
-        .actions button, .actions a {
-          font-size: 0.8rem;
-          padding: 0.4rem 0.8rem;
-          border-radius: 0.6rem;
-          font-weight: 500;
-          transition: all 0.3s ease;
-        }
-
-        .actions button {
-          background-color: var(--clr-danger);
-          color: var(--clr-white);
-        }
-
-        .actions button:hover {
-          background-color: #d63950;
-        }
-
-        .actions a {
-          background-color: var(--clr-primary);
-          color: var(--clr-white);
-          text-decoration: none;
-          margin-left: 0.5rem;
-        }
-
-        .actions a:hover {
-          background-color: var(--clr-primary-variant);
-        }
-
-        @media (max-width: 640px) {
-          .cita-card { grid-template-columns: 1fr; }
-          .actions { margin-top: 0.5rem; }
-        }
-    </style>
+    /* Responsive */
+    @media (max-width:780px){
+      .header-panel{ flex-direction:column; align-items:flex-start; gap:10px }
+      .right{ align-items:flex-start }
+      .appt{ grid-template-columns:1fr; }
+      .actions{ width:100%; }
+      .actions .btn{ flex:1; justify-content:center }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <a href="{{ route('paciente.dashboard') }}" class="back-btn">&larr; Regresar</a>
+  <div class="page">
 
-        <h1>Mis Citas Médicas</h1>
-
-        @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-        @if(session('error'))
-            <div class="alert alert-danger">{{ session('error') }}</div>
-        @endif
-
-        @if($citas->isEmpty())
-            <p>No tienes citas registradas.</p>
-        @else
-            @foreach($citas as $cita)
-            <div class="cita-card">
-                <div class="cita-info">
-                    <h3>Fecha: {{ $cita->fecha }} | Hora: {{ $cita->hora }}</h3>
-                    <p>Doctor: {{ $cita->doctor->name ?? 'Sin asignar' }}</p>
-                    <p>Especialidad: {{ $cita->especialidad->nombre ?? 'Sin especialidad' }}</p>
-                </div>
-                <div class="flex flex-col items-end justify-center">
-                    <span class="badge badge-{{ $cita->estado }}">{{ ucfirst($cita->estado) }}</span>
-                    @if(!in_array($cita->estado, ['cancelada','realizada']))
-                    <div class="actions">
-                        <form action="{{ route('paciente.citas.cancelar', $cita->id) }}" method="POST" style="display:inline-block">
-                            @csrf
-                            <button type="submit">Cancelar</button>
-                        </form>
-                        <a href="{{ route('paciente.editar-cita', $cita->id) }}">Reagendar</a>
-                    </div>
-                    @endif
-                </div>
-            </div>
-            @endforeach
-        @endif
+    <!-- Header con panel blanco -->
+    <div class="page-header">
+      <div class="header-panel">
+        <div class="header-left">
+          <a href="{{ route('paciente.dashboard') }}" class="btn-back" aria-label="Regresar">
+            <!-- flecha -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+            Regresar
+          </a>
+          <div>
+            <h1 class="title">Mis Citas Médicas</h1>
+            <p class="subtitle">Consulta, cancela o reagenda tus próximas citas.</p>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- Alerts -->
+    <div class="alerts">
+      @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+      @endif
+      @if(session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+      @endif
+    </div>
+
+    <!-- Lista de citas -->
+    <div class="list">
+      @if($citas->isEmpty())
+        <div class="empty">No tienes citas registradas.</div>
+      @else
+        @foreach($citas as $cita)
+          <div class="appt">
+            <div class="left">
+              <h3 class="appt-title">
+                Fecha:
+                {{ \Carbon\Carbon::parse($cita->fecha)->format('d/m/Y') }}
+                &nbsp;|&nbsp;
+                Hora:
+                {{ strlen($cita->hora ?? '')>=5 ? substr($cita->hora,0,5) : $cita->hora }}
+              </h3>
+              <p class="appt-meta">Doctor: {{ $cita->doctor->name ?? 'Sin asignar' }}</p>
+              <p class="appt-meta">Especialidad: {{ $cita->especialidad->nombre ?? 'Sin especialidad' }}</p>
+            </div>
+
+            <div class="right">
+              <!-- Estado -->
+              @switch($cita->estado)
+                @case('pendiente')  <span class="pill pending">PENDIENTE</span> @break
+                @case('confirmada') <span class="pill info">CONFIRMADA</span> @break
+                @case('cancelada')  <span class="pill danger">CANCELADA</span> @break
+                @case('realizada')  <span class="pill success">REALIZADA</span> @break
+                @default            <span class="pill info">{{ strtoupper($cita->estado) }}</span>
+              @endswitch
+
+              @if(!in_array($cita->estado, ['cancelada','realizada']))
+                <div class="actions">
+                  <form action="{{ route('paciente.citas.cancelar', $cita->id) }}" method="POST" style="display:inline-block">
+                    @csrf
+                    <button type="submit" class="btn btn-cancel">Cancelar</button>
+                  </form>
+                  <a class="btn btn-primary" href="{{ route('paciente.editar-cita', $cita->id) }}">Reagendar</a>
+                </div>
+              @endif
+            </div>
+          </div>
+        @endforeach
+      @endif
+    </div>
+
+  </div>
 </body>
 </html>

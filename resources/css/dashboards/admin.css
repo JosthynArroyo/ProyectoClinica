@@ -668,10 +668,18 @@ Media Query for Phoens
       position: absolute;
       left: 1rem;
     }
+}
 
+.btn-outline{
+    background: transparent;
+    border: 1px solid #cfd8dc;
+    padding: .6rem 1rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn-outline:hover{ background: #eef2ff; }
 
-
-    
-
-
+.dark-theme-variables .insights > div small{
+  color:#cbd5e1;
 }

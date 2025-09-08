@@ -23,3 +23,41 @@ document.getElementById('exportForm').addEventListener('submit', function(e) {
     alert('Descargando archivo Excel...');
 });
   
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const tbody = document.getElementById('citasBody');
+    const btnMore = document.getElementById('btnShowMore');
+    const btnLess = document.getElementById('btnShowLess');
+
+    const STEP = 8;
+    let visible = STEP;
+
+    const rows = () => Array.from(tbody.querySelectorAll('tr'));
+
+    function renderRows() {
+        const rs = rows();
+        rs.forEach((tr, i) => tr.style.display = (i < visible) ? '' : 'none');
+        btnMore.style.display = (visible < rs.length) ? '' : 'none';
+        btnLess.style.display = (rs.length > STEP && visible > STEP) ? '' : 'none';
+    }
+
+    btnMore.addEventListener('click', () => { visible += STEP; renderRows(); });
+    btnLess.addEventListener('click', () => { visible = STEP; renderRows(); });
+
+    renderRows();
+
+    const resumenUrl = "{{ route('admin.dashboard.resumen') }}";
+    async function refreshKPIs(){
+        try{
+            const res = await fetch(resumenUrl, { headers: { 'X-Requested-With':'XMLHttpRequest' }});
+            if(!res.ok) return;
+            const data = await res.json();
+            document.getElementById('kpi-agendadas').textContent = data.agendadas;
+            document.getElementById('kpi-completadas').textContent = data.completadas;
+            document.getElementById('kpi-canceladas').textContent = data.canceladas;
+        }catch(e){}
+    }
+    refreshKPIs();
+    setInterval(refreshKPIs, 15000);
+});

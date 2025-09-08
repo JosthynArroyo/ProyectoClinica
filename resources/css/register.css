@@ -134,3 +134,35 @@ a {
         font-size: 14px;
     }
 }
+
+/* Ojo de contraseña — overrides para evitar heredar el estilo global de button */
+.password-field{position:relative;display:flex;align-items:center}
+.password-field input{padding-right:44px}
+
+.password-field .toggle-eye{
+  all: unset;
+  position:absolute;
+  right:10px;
+  top:50%;
+  transform:translateY(-50%);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:32px;
+  height:32px;
+  border-radius:8px;
+  background:#dce1eb;
+  cursor:pointer;
+  line-height:1;
+  color:#1f2a44;
+}
+
+.password-field .toggle-eye:focus{outline:2px solid #2563eb; outline-offset:2px}
+.password-field .toggle-eye svg{display:block; pointer-events:none}
+
+.password-field .toggle-eye .eye-off{display:none}
+.password-field .toggle-eye.is-on .eye-on{display:none}
+.password-field .toggle-eye.is-on .eye-off{display:block}
+
+.error{color:#ff4e4c;font-size:12px;margin-top:4px;display:block}
+
