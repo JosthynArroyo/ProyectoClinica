@@ -12,7 +12,6 @@ class ExportCitasController extends Controller
 {
     public function exportarCitas(): StreamedResponse
     {
-        $citas = Cita::with(['paciente', 'doctor'])->get();
 
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
@@ -25,13 +24,19 @@ class ExportCitasController extends Controller
 
         // Datos
         $fila = 2;
-        foreach ($citas as $cita) {
-            $sheet->setCellValue("A{$fila}", $cita->paciente->name ?? 'Sin paciente');
-            $sheet->setCellValue("B{$fila}", $cita->doctor->name ?? 'Sin asignar');
-            $sheet->setCellValue("C{$fila}", $cita->fecha);
-            $sheet->setCellValue("D{$fila}", $cita->hora);
-            $fila++;
-        }
+        Cita::with(['paciente', 'doctor'])
+            ->chunkById(500, function ($citas) use ($sheet, &$fila) {
+                foreach ($citas as $cita) {
+                    $sheet->setCellValue("A{$fila}", $cita->paciente->name ?? 'Sin paciente');
+                    $sheet->setCellValue("B{$fila}", $cita->doctor->name ?? 'Sin asignar');
+                    $sheet->setCellValue("C{$fila}", $cita->fecha);
+                    $sheet->setCellValue("D{$fila}", $cita->hora);
+                    $fila++;
+                }
+
+                // Liberar memoria del lote actual
+                unset($citas);
+            });
 
         // Nombre
         $fileName = 'citas_' . now()->format('Ymd_His') . '.xlsx';

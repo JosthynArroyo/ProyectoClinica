@@ -9,6 +9,6 @@ class NotificarDoctorListener
 {
     public function handle(CitaAgendada $event)
     {
-        Log::info("Doctor {$event->cita->doctor->nombre} notificado de nueva cita con {$event->cita->paciente->nombre}");
+        Log::info("Doctor {$event->cita->doctor->name} notificado de nueva cita con {$event->cita->paciente->name}");
     }
 }

@@ -31,7 +31,13 @@
             <a href="{{ route('admin.pacientes.crear') }}"><span class="material-symbols-outlined">group_add</span><h3>Registrar Paciente</h3></a>
 
             <a href="{{ route('admin.perfil.edit') }}"><span class="material-symbols-outlined">account_circle</span><h3>Perfil</h3></a>
-            <a href="{{ route('salir') }}"><span class="material-symbols-outlined">logout</span><h3>Cerrar Sesión</h3></a>
+            <form id="logout-form" action="{{ route('salir') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <span class="material-symbols-outlined">logout</span>
+                <h3>Cerrar Sesión</h3>
+            </a>
         </div>
     </aside>
 

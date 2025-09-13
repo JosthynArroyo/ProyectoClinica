@@ -18,6 +18,7 @@ class Cita extends Model
         'fecha',
         'hora',
         'estado',
+        'activo',
     ];
 
     const ESTADO_PENDIENTE   = 'pendiente';

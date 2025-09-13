@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Role;
 
@@ -21,7 +22,7 @@ class DatabaseSeeder extends Seeder
             ['email' => 'admin@clinic.test'], 
             [
                 'name'     => 'Administrador',
-                'password' => Hash::make('Admin123'),           
+                'password' => Hash::make(env('ADMIN_PASSWORD', Str::password())),        
                 'active'   => true,
             ]
         );

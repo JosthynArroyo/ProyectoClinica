@@ -77,7 +77,7 @@ Route::middleware(['auth', 'role:doctor'])->prefix('doctor')->group(function () 
     Route::get('/dashboard/data', [DoctorDashboardController::class, 'dashboardData'])->name('doctor.dashboard.data');
 });
 
-Route::get('/salir', function () {
+Route::post('/salir', function () {
     Auth::logout();
     return redirect('/');
 })->name('salir');

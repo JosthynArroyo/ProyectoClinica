@@ -21,7 +21,13 @@
                 <a href="{{ route('doctor.dashboard') }}"><span class="material-symbols-outlined">dashboard</span><h3>Inicio</h3></a>
                 <a href="{{ route('doctor.citas') }}"><span class="material-symbols-outlined">calendar_month</span><h3>Mis Citas</h3></a>
                 <a href="{{ route('doctor.perfil.edit') }}"><span class="material-symbols-outlined">account_circle</span><h3>Perfil</h3></a>
-                <a href="{{ route('salir') }}"><span class="material-symbols-outlined">logout</span><h3>Cerrar Sesión</h3></a>
+                <form id="logout-form" action="{{ route('salir') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <span class="material-symbols-outlined">logout</span>
+                    <h3>Cerrar Sesión</h3>
+                </a>
             </div>
         </aside>
 
