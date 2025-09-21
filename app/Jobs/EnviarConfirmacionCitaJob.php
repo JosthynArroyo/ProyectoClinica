@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Jobs;
 
 use App\Models\Cita;
@@ -24,6 +25,9 @@ class EnviarConfirmacionCitaJob implements ShouldQueue
 
     public function handle()
     {
+        Mail::to($this->cita->paciente->email)
+            ->send(new ConfirmacionCitaMail($this->cita));
+
         Log::info("Confirmación enviada a: {$this->cita->paciente->name} ({$this->cita->paciente->email})");
     }
 }
